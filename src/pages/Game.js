@@ -9,24 +9,44 @@ import Button from '@material-ui/core/Button';
 
 
 class Game extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      questions: []
+    }
+  }
+
+  componentWillMount(){
+    fetch("https://opentdb.com/api.php?amount=10&type=multiple")
+    .then(res => {
+      console.log(res);
+      res = res.json()
+      console.log(res);
+      return res;
+    }).then(res => {
+      console.log(res.results[0]);
+      this.setState({questions: res.results});
+    })
+  }
 
   render() {
+    console.log("STATE", this.state);
     return (
       <div className="gamepage">
         <Card className="card">
           <CardContent>
-            <p>What is the class mascot?</p>
+            <p>{this.state.questions[0] && this.state.questions[0].question}</p>
               <Button>
-              Cat
+              {this.state.questions[0] && this.state.questions[0].incorrect_answers[0]}
               </Button>
               <Button>
-              Dog
+              {this.state.questions[0] && this.state.questions[0].incorrect_answers[1]}
               </Button>
               <Button>
-              Unicorn
+              {this.state.questions[0] && this.state.questions[0].incorrect_answers[2]}
               </Button>
               <Button>
-              Lion
+              {this.state.questions[0] && this.state.questions[0].correct_answer}
               </Button>
           </CardContent>
             <CardActions>
