@@ -9,7 +9,7 @@ class Home extends Component {
     return (
       <div className="homepage">
         <Button variant="contained" color="primary">
-          Start
+          Start!
         </Button>
       </div>
     );
