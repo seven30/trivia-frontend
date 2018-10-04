@@ -20,16 +20,20 @@ class GameCard extends Component {
   render(){
     console.log("PROPS", this.props);
     let { questions } = this.props;
+    //Assign current question obj from array using the current count
     let questionObj = questions[this.props.counter];
+    //assign and store question string from questionObj
     let question = questionObj.question;
+    //Run helper functions replaceUnicode to replace unicode with appropriate characters
     question = replaceUnicode(question);
     let { correct_answer, incorrect_answers } = questionObj;
-    //console.log("INC", incorrect_answers, "COR", correct_answer);
+    //Set incorrect_answers array to a new variable
     let answers = incorrect_answers;
+    //Push the correct answer string into the new answers array
     answers.push(correct_answer);
-    //console.log("ANS", answers);
+    //Run helper function shuffle to shuffle the array values
     shuffle(answers);
-    //console.log("SHUFFLE", answers);
+    //Map the answers in answer array to different Buttons
     let answer = answers.map((val, i) => {
       val = replaceUnicode(val);
       return (
