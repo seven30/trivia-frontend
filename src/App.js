@@ -24,6 +24,7 @@ class App extends Component {
           </Switch>
           //if not logged in
           : <Switch>
+            <Route exact path='/' component={Home} / >
             <Route exact path='/login' component={Login} / >
             <Route exact path='/register' component={Register} / >
             <Redirect from='/game' to='/Login' / >

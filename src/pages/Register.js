@@ -11,16 +11,16 @@ class RegisterPage extends Component {
 			errors: "",
 			form: {
 				user: {
-					userName: "",
+					username: "",
 					email: "",
-					password: "",
+					password: ""
 				}
 			}
 		}
 	}
 
 	render() {
-		let { userName, email, password } = this.state.form.user
+		let { username, email, password } = this.state.form.user
 		return (
 			<main>
 				<h2>Welcome! Register here.</h2>
@@ -28,8 +28,8 @@ class RegisterPage extends Component {
 					<input
             placeholder="User Name"
 						type="text"
-						name="userName"
-						value={userName}
+						name="username"
+						value={username}
 						onChange={this.onChange}
 					/>
 					<input
