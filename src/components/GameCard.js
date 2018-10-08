@@ -38,6 +38,7 @@ class GameCard extends Component {
     console.log("PROPS", this.props);
     let { questions, counter, answered_questions, answers_order} = this.props;
     console.log("answered", answered_questions, answers);
+
     //Assign current question obj from array using the current count
     let questionObj = questions[counter];
     //assign and store question string from questionObj
