@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,7 +10,7 @@ class Question extends Component {
   constructor(props){
     super(props)
     this.state = {
-      
+
     }
   }
   render() {

@@ -64,10 +64,13 @@ class RegisterPage extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault()
+		let { email, password } = this.state.form
 
 		this.auth.register(this.state.form)
+		this.auth.login(email, password)
 		.then(json => {
 			console.log("handling any errors");
+			this.props.history.replace('/game')
 			if(json.errors) {
 				this.setState({
 					errors: json.errors
