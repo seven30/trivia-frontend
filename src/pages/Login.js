@@ -71,6 +71,7 @@ class Login extends Component {
       this.auth.login(this.state)
       .then(json => {
 			  console.log("handling any errors");
+        this.props.history.replace('/game')
 			  if(json.errors) {
 				  this.setState({
 					  errors: json.errors
