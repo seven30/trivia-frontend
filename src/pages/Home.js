@@ -17,7 +17,6 @@ const theme = createMuiTheme({
   }
 })
 
-      // <div style={{ padding: "10vh" }}>
 class Home extends Component {
 
   handleClick(){
@@ -30,17 +29,16 @@ class Home extends Component {
         <Grid container direction= "column"
           justify= "space-evenly"
           alignItems= "center">
-            <Grid item>
               <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
-            </Grid>
-            <Grid item>
               <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" color="primary" size= "large" component={Link} to="/gameguest">
+                  <Button variant="contained" color="primary" size= "large" component={Link} to="/game">
                   Play as Guest
+                  </Button>
+                  <Button variant="contained" color="primary" size= "large" component={Link} to="/modalexample">
+                  modal example
                   </Button>
                   <LoginButton/>
               </MuiThemeProvider>
-            </Grid>
         </Grid>
 
     );

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import AuthService from '../services'
-
 import { Link } from 'react-router-dom'
+
+import LoginModal from './LoginModal.js'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -29,14 +30,14 @@ class LoginButton extends Component {
         if(this.state.status || auth.loggedIn()){
             return (
                 <div>
-                    <Button variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
+                    <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
                     {(!this.state.loggedIn) && <Redirect to="/login" />}
                 </div>
             )
         } else {
             return(
                 <div>
-                    <Button variant="contained" color="primary" component={Link} to="/login"> Login </Button>
+                    <Button size= "large" variant="contained" color="primary" component={Link} to="/login"> Login </Button>
                     {(this.state.loggedIn) && <Redirect to="/protected" />}
                 </div>
             )
