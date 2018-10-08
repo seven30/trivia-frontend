@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
+import Timer from '../components/timer.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 
 
@@ -15,7 +16,8 @@ class Game extends Component {
       questionsFetched: false,
       score: 0,
       answered_questions: [],
-      answers_order: []
+      answers_order: [],
+      questionIsAnswered: false
     }
   }
 
@@ -53,18 +55,19 @@ class Game extends Component {
     }
     let { answered_questions } = this.state;
     answered_questions[counter] = answered_question;
-    this.setState({score: score, answered_questions: answered_questions, answers_order: answers_order});
+    this.setState({score: score, answered_questions: answered_questions, answers_order: answers_order,
+    questionIsAnswered: true});
   }
 
   nextQuestion(){
     let counter = this.state.counter;
     counter++;
     //increase counter to next question, and reset answers_order for next question
-    this.setState({counter: counter, answers_order: [] })
+    this.setState({counter: counter, answers_order: [], questionIsAnswered: false })
   }
 
   render() {
-    let { score, questions, counter, questionsFetched, answered_questions, answers_order } = this.state;
+    let { score, questions, counter, questionsFetched, answered_questions, answers_order, questionIsAnswered } = this.state;
     let question, incorrect_answers, correct_answer, answers;
 
     if(counter !== 0 && counter === questions.length){
@@ -79,6 +82,10 @@ class Game extends Component {
     console.log("STATE", this.state);
     return (
     <div>
+      //Timer Component
+      { questionsFetched && <Timer questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
+
+      //GameCard Component
       { questionsFetched &&
       <GameCard questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
     </div>
