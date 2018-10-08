@@ -19,7 +19,13 @@ const theme = createMuiTheme({
 
       // <div style={{ padding: "10vh" }}>
 class Home extends Component {
+
+  handleClick(){
+    this.props.history.push('/game');
+  }
+
   render() {
+    console.log(this.props);
     return (
         <Grid container direction= "column"
           justify= "space-evenly"
@@ -36,6 +42,7 @@ class Home extends Component {
               </MuiThemeProvider>
             </Grid>
         </Grid>
+
     );
   }
 }

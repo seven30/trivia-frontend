@@ -26,14 +26,6 @@ it('is able to retrive a list of questions via fetch', async ()=> {
   await game.instance().componentDidMount();
   await sleep(DELAY_MS)
 
-  console.log(game.state());
+  // console.log(game.state());
   expect((game.state().questions).length).not.toBe(0);
-});
-
-it('checkAnswer to increase score with a correct answer', () => {
-
-});
-
-it('counter to increase after a question has been answered', () => {
-
 });
