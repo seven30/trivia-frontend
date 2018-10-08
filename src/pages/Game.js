@@ -4,11 +4,14 @@ import Button from '@material-ui/core/Button';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
-
+import AuthService from '../services';
+import { createGameHistory } from '../api/game-history-api';
 
 class Game extends Component {
   constructor(props){
     super(props)
+    this.Auth = new AuthService();
+    this.gameMode = "Classic";
     this.state = {
       questions: [],
       counter: 0,
@@ -19,7 +22,7 @@ class Game extends Component {
     }
   }
 
-  async componentDidMount(){
+  componentDidMount(){
     if(!this.state.questionsFetched){ // Check if data has already been fetched.
       //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
       fetch("https://opentdb.com/api.php?amount=10&type=multiple")
@@ -63,18 +66,41 @@ class Game extends Component {
     this.setState({counter: counter, answers_order: [] })
   }
 
+  saveGameHistory(){
+    //let user_id = this.Auth.getUserId()
+    let game_history = {
+      user_id: this.Auth.getUserId(),
+      game_mode: this.gameMode,
+      correct_answers: this.state.score,
+      total_questions: this.state.questions.length
+    }
+    createGameHistory(game_history);
+  }
+
   render() {
     let { score, questions, counter, questionsFetched, answered_questions, answers_order } = this.state;
     let question, incorrect_answers, correct_answer, answers;
 
     if(counter !== 0 && counter === questions.length){
-      return (
-        <div>
-          <h1>Game Done!</h1>
-          <h2>Score: {score/questions.length*100}%</h2>
-          <Button>Play Again</Button>
-        </div>
-      )
+      if(this.Auth.loggedIn()){
+        this.saveGameHistory();
+        return (
+          <div>
+            <h1>Game Done!</h1>
+            <h2>Score: {score/questions.length*100}%</h2>
+            <Button>Play Again</Button>
+            <Button>View Game History</Button>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <h1>Game Done!</h1>
+            <h2>Score: {score/questions.length*100}%</h2>
+            <Button>Play Again</Button>
+          </div>
+        )
+      }
     }
     console.log("STATE", this.state);
     return (
