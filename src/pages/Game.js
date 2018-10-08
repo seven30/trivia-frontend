@@ -82,10 +82,9 @@ class Game extends Component {
     console.log("STATE", this.state);
     return (
     <div>
-      //Timer Component
+
       { questionsFetched && <Timer questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
 
-      //GameCard Component
       { questionsFetched &&
       <GameCard questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
     </div>
