@@ -6,7 +6,7 @@ import Register from './pages/Register.js';
 import Home from './pages/Home.js';
 import Game from './pages/Game.js';
 import Login from './pages/Login.js';
-import Header from './components/Header';
+import LoginButton from './components/LoginButton';
 
 class App extends Component {
   render() {
@@ -27,6 +27,7 @@ class App extends Component {
             <Route exact path='/' component={Home} / >
             <Route exact path='/login' component={Login} / >
             <Route exact path='/register' component={Register} / >
+            <Route exact path='/gameguest' component={Game} / >
             <Redirect from='/game' to='/Login' / >
           </Switch>
         }

@@ -3,8 +3,10 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+
 import '../pages/Game.css';
 import './GameCard.css';
+
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
