@@ -66,18 +66,19 @@ class Login extends Component {
 
     // when user submits form,
     handleSubmit = (e) => {
-        e.preventDefault()
-        // this function requires an email and password
-        this.auth.login(this.state)
-        .then(json => {
-			console.log("handling any errors");
-			if(json.errors) {
-				this.setState({
-					errors: json.errors
-				})
-			}
-			return json
-		})
+      e.preventDefault()
+      // this function requires an email and password
+      this.auth.login(this.state)
+      .then(json => {
+			  console.log("handling any errors");
+        this.props.history.replace('/game')
+			  if(json.errors) {
+				  this.setState({
+					  errors: json.errors
+				  })
+			  }
+			  return json
+		  })
     }
 }
 
