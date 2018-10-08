@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import GameCard from '../components/GameCard';
 import Game from '../pages/Game';
 import Enzyme, {
-  mount
+  mount, shallow
 } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import Button from '@material-ui/core/Button';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -23,8 +24,18 @@ const question = [
 ]
 
 it('renders without crashing', () => {
-      const game = mount( < Game / > );
+      // const game = mount( < Game / > );
       const div = document.createElement('div');
       ReactDOM.render( < GameCard questions={question} counter={0} checkAnswer={() => console.log("test")}/>, div);
         ReactDOM.unmountComponentAtNode(div);
     });
+
+describe('Test Answer Buttons', () => {
+  it('Test click events', () => {
+    const mockCheck = jest.fn()
+    const component = shallow(<GameCard questions={question} counter={0} checkAnswer={mockCheck}/>)
+    // console.log(component.debug());
+    component.find('#btn1').simulate('click');
+    expect(mockCheck).toHaveBeenCalled();
+  });
+});

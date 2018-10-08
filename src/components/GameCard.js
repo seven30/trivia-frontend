@@ -18,7 +18,7 @@ class GameCard extends Component {
   // this.otherCheckAnswer.bind(this, answers[i])
 
   render(){
-    console.log("PROPS", this.props);
+    // console.log("PROPS", this.props);
     let { questions } = this.props;
     //Assign current question obj from array using the current count
     let questionObj = questions[this.props.counter];
@@ -37,7 +37,7 @@ class GameCard extends Component {
     let answer = answers.map((val, i) => {
       val = replaceUnicode(val);
       return (
-        <Button key={i.toString()} onClick={() => this.props.checkAnswer(answers[i])}>{val}</Button>
+        <Button key={i.toString()} id={`btn${i}`} onClick={() => this.props.checkAnswer(answers[i])}>{val}</Button>
       )
     })
     return (
