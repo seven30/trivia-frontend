@@ -3,10 +3,19 @@ import { Redirect } from 'react-router-dom'
 import AuthService from '../services'
 import { Link } from 'react-router-dom'
 
-import LoginModal from './LoginModal.js';
+//Text Inputs
+import LoginTextInputs from './LoginTextInputs.js';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+ // {(this.state.loggedIn) && <Redirect to="/protected" />}
+
 
 //function handles the Modal size
 function getModalStyle() {
@@ -53,6 +62,7 @@ const styles = theme => ({
   },
 })
 
+
 const auth = new AuthService()
 let initialStatus = auth.loggedIn()
 
@@ -60,24 +70,42 @@ class LoginButton extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loggedIn: initialStatus
+          loggedIn: initialStatus,
+          open: false
         }
     }
+
+  handleOpen = () => {
+    this.setState({open: true})
+  }
+
+  handleClose = () => {
+    this.setState({open: false})
+  }
+
+
     render() {
-        if(this.state.status || auth.loggedIn()){
-            return (
-                <div>
-                    <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
-                    {(!this.state.loggedIn) && <Redirect to="/login" />}
-                </div>
-            )
-        } else {
-            return(
-                <div>
-                    <Button size= "large" variant="contained" color="primary" component={Link} to="/login"> Login </Button>
-                    {(this.state.loggedIn) && <Redirect to="/protected" />}
-                </div>
-            )
+      const { classes } = this.props;
+      if(this.state.status || auth.loggedIn()){
+        return (
+          <div>
+            <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
+              {(!this.state.loggedIn) && <Redirect to="/login" />}
+          </div>
+        )} else {
+          return(
+            <div>
+              <Button size= "large" variant="contained" color="primary" onClick={this.handleOpen}> Login </Button>
+                <Modal
+                  open={this.state.open}
+                  onClose={this.handleClose}
+                >
+                  <div style={getModalStyle()}className={classes.paper}>
+                    <LoginTextInputs/>
+                    </div>
+                </Modal>
+            </div>
+          )
         }
     }
 
@@ -89,4 +117,4 @@ class LoginButton extends Component {
     }
 }
 
-export default LoginButton
+export default withStyles(styles)(LoginButton)

@@ -35,9 +35,6 @@ class Home extends Component {
                   <Button variant="contained" color="primary" size= "large" component={Link} to="/game">
                   Play as Guest
                   </Button>
-                  <Button variant="contained" color="primary" size= "large" component={Link} to="/modalexample">
-                  modal example
-                  </Button>
                   <LoginButton/>
               </MuiThemeProvider>
         </Grid>

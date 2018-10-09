@@ -34,15 +34,6 @@ class LoginTextInputs extends React.Component {
     const { classes } = this.props;
     return (
       <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="outlined-name"
-          label="Name"
-          className={classes.textField}
-          value={this.state.name}
-          onChange={this.handleChange("name")}
-          margin="normal"
-          variant="outlined"
-        />
 
         <TextField
           id="outlined-email-input"
