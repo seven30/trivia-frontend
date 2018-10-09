@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 const theme = createMuiTheme({
 
+//"palette" needed to change color of buttons
   palette: {
     primary: {main: '#000000'},
     secondary: {main: '#AED6F1'},
@@ -40,7 +41,6 @@ class Home extends Component {
                   <LoginButton/>
               </MuiThemeProvider>
         </Grid>
-
     );
   }
 }
