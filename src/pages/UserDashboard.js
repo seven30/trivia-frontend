@@ -10,6 +10,25 @@ import AuthService from '../services';
 import { getGameHistory } from '../api/game-history-api';
 import withAuth from '../components/withAuth.js'
 
+const NumericTableCell = withStyles(theme => ({
+  head: {
+    color: theme.palette.common.white,
+  },
+  body: {
+    color: theme.palette.common.white,
+    textAlign: "center",
+  },
+}))(TableCell)
+
+const StringTableCell = withStyles(theme => ({
+  head: {
+    color: theme.palette.common.white,
+  },
+  body: {
+    color: theme.palette.common.white,
+  },
+}))(TableCell)
+
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
@@ -28,34 +47,62 @@ class UserDashboard extends Component {
     });
   }
 
+  calculateAverage = () => {
+    let totalCorrect = 0;
+    let totalAnswered = 0;
+    for (var i = 0; i < this.state.gameHistories.length; i++) {
+      totalCorrect = totalCorrect + this.state.gameHistories[i].correct_answers
+      totalAnswered = totalAnswered + this.state.gameHistories[i].total_questions
+      console.log("correct:", totalCorrect);
+      console.log("answered:", totalAnswered);
+    }
+    let average = Math.floor((totalCorrect/totalAnswered)*100)
+    console.log("average:", average);
+    return average
+  }
+
   render() {
     console.log("state", this.state.gameHistories);
     let gameHistory = this.state.gameHistories.map((gameHistory, i) => {
       return(
         <TableRow key = {i.toString()}>
-          <TableCell component="th" scope="row">
+          <StringTableCell component="th" scope="row">
           {gameHistory.game_mode}
-          </TableCell>
-          <TableCell numeric>{gameHistory.correct_answers}</TableCell>
-          <TableCell numeric>{gameHistory.total_questions}</TableCell>
-          <TableCell numeric>{
+          </StringTableCell>
+          <NumericTableCell numeric>{gameHistory.correct_answers}</NumericTableCell>
+          <NumericTableCell numeric>{gameHistory.total_questions}</NumericTableCell>
+          <NumericTableCell numeric>{
             Math.floor((gameHistory.correct_answers/gameHistory.total_questions)*100)
-          }%</TableCell>
+          }%</NumericTableCell>
         </TableRow>
       )
     })
+    let average = this.calculateAverage()
     return (
       <div>
-        <TableHead ><TableRow><TableCell><h1>Score History</h1></TableCell></TableRow></TableHead>
         <TableHead>
           <TableRow>
-            <TableCell>Game Mode</TableCell>
-            <TableCell># of Correct Answers</TableCell>
-            <TableCell>Total # of Questions</TableCell>
-            <TableCell>Quiz Score</TableCell>
+            <StringTableCell>
+              <h1>Score History</h1>
+            </StringTableCell>
+          </TableRow>
+        </TableHead>
+        <TableHead>
+          <TableRow>
+            <StringTableCell>Game Mode</StringTableCell>
+            <StringTableCell># of Correct Answers</StringTableCell>
+            <StringTableCell>Total # of Questions</StringTableCell>
+            <StringTableCell>Quiz Score</StringTableCell>
           </TableRow>
         </TableHead>
         <TableBody>{gameHistory}</TableBody>
+        <TableHead>
+          <TableRow>
+            <StringTableCell>
+              <h3>Lifetime Score: {average}%</h3>
+            </StringTableCell>
+          </TableRow>
+        </TableHead>
       </div>
     )
   }
