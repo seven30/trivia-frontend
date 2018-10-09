@@ -90,10 +90,10 @@ class Game extends Component {
         this.saveGameHistory();
         return (
           <div>
-            <h1>Game Done!</h1>
-            <h2>Score: {score/questions.length*100}%</h2>
-            <Button>Play Again</Button>
-            <Button>View Game History</Button>
+            <h1 color="#FFFFFF">Game Done!</h1>
+            <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
+            <Button color="primary">Play Again</Button>
+            <Button color="primary">View Game History</Button>
           </div>
         )
       } else { //If guest, show end page with results, do not save history.
