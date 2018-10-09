@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Table } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
@@ -92,8 +92,8 @@ class Game extends Component {
           <div>
             <h1 color="#FFFFFF">Game Done!</h1>
             <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
-            <Button color="primary">Play Again</Button>
-            <Button color="primary">View Game History</Button>
+            <Button color="primary" href='/game'>Play Again</Button>
+            <Button color="primary" href='/dashboard'>View Game History</Button>
           </div>
         )
       } else { //If guest, show end page with results, do not save history.

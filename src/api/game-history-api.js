@@ -18,11 +18,29 @@ let createGameHistory = function(game_history){
     console.log(res);
     return res;
   }).catch(err => {
-      console.log(err);
+      console.log("ERROR: ", err);
       return err;
+  })
+}
+
+let getGameHistory = function(user_id){
+  return fetch(BASE + "/users/" + user_id + "/game_histories")
+  .then((res) => {
+    console.log("currently fetching game histories")
+    let json = res.json()
+    console.log(json);
+    return json
+  })
+  .then(res => {
+    console.log("second .then response: ", res);
+    return res})
+  .catch(err => {
+    console.log("ERROR: ", err)
+    return err
   })
 }
 
 export {
   createGameHistory,
+  getGameHistory
 }
