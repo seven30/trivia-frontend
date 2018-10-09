@@ -4,7 +4,7 @@ import AuthService from '../services'
 import { Link } from 'react-router-dom'
 
 //Text Inputs
-import LoginTextInputs from './LoginTextInputs.js';
+import Login from '../pages/Login.js';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -101,7 +101,7 @@ class LoginButton extends Component {
                   onClose={this.handleClose}
                 >
                   <div style={getModalStyle()}className={classes.paper}>
-                    <LoginTextInputs/>
+                    <Login/>
                     </div>
                 </Modal>
             </div>
