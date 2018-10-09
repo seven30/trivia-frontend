@@ -70,7 +70,7 @@ class Game extends Component {
   }
 
   saveGameHistory(){
-    //let user_id = this.Auth.getUserId()
+    //create a game history object
     let game_history = {
       user_id: this.Auth.getUserId(),
       game_mode: this.gameMode,
@@ -83,19 +83,20 @@ class Game extends Component {
   render() {
     let { score, questions, counter, questionsFetched, answered_questions, answers_order, questionIsAnswered } = this.state;
     let question, incorrect_answers, correct_answer, answers;
-
+    //If counter has reached the end of the questions render end page.
     if(counter !== 0 && counter === questions.length){
+      //If user is logged in, save game history.
       if(this.Auth.loggedIn()){
         this.saveGameHistory();
         return (
           <div>
-            <h1>Game Done!</h1>
-            <h2>Score: {score/questions.length*100}%</h2>
-            <Button href='/game'>Play Again</Button>
-            <Button href='/dashboard'>View Game History</Button>
+            <h1 color="#FFFFFF">Game Done!</h1>
+            <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
+            <Button color="primary" href='/game'>Play Again</Button>
+            <Button color="primary" href='/dashboard'>View Game History</Button>
           </div>
         )
-      } else {
+      } else { //If guest, show end page with results, do not save history.
         return (
           <div>
             <h1>Game Done!</h1>
@@ -106,6 +107,7 @@ class Game extends Component {
       }
     }
     console.log("STATE", this.state);
+    //If game ongoing, render GameCard to display questions, and answers.
     return (
     <div>
 

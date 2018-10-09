@@ -22,18 +22,21 @@ const question = [
     "incorrect_answers": ["What a Wonderful World", "When You Wish Upon A Star", "Singing In The Rain"]
   }
 ]
+const answers_order = [];
+const answered_questions = [];
 
 it('renders without crashing', () => {
-      // const game = mount( < Game / > );
+      console.log(answers_order.length);
       const div = document.createElement('div');
-      ReactDOM.render( < GameCard questions={question} counter={0} checkAnswer={() => console.log("test")}/>, div);
+      ReactDOM.render( < GameCard questions={question} answers_order={answers_order} answered_questions={answered_questions} counter={0} nextQuestion={() => console.log("ran next question")} checkAnswer={() => console.log("ran check Answer")}/>, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
 describe('Test Answer Buttons', () => {
   it('Test click events', () => {
-    const mockCheck = jest.fn()
-    const component = shallow(<GameCard questions={question} counter={0} checkAnswer={mockCheck}/>)
+    const mockCheck = jest.fn();
+    const mockNext = jest.fn();
+    const component = shallow(<GameCard questions={question} answers_order={answers_order} answered_questions={answered_questions} counter={0} nextQuestion={mockNext} checkAnswer={mockCheck}/>)
     // console.log(component.debug());
     component.find('#btn1').simulate('click');
     expect(mockCheck).toHaveBeenCalled();
