@@ -22,11 +22,7 @@ class GameCard extends Component {
   }
 
   handleAnswerClick(answer, answers_order){
-    console.log(answer);
-    let correct = this.props.questions[this.props.counter].correct_answer;
-    console.log(correct);
-    let incorrect = this.props.questions[this.props.counter].incorrect_answers;
-    console.log("incorrect", incorrect);
+    //Run check answer in Game, send along the answer, and the current order of shuffled answers array.
     this.props.checkAnswer(answer, answers_order);
   }
 
@@ -37,7 +33,7 @@ class GameCard extends Component {
   render(){
     console.log("PROPS", this.props);
     let { questions, counter, answered_questions, answers_order} = this.props;
-    console.log("answered", answered_questions, answers);
+    console.log("answered", answered_questions);
 
     //Assign current question obj from array using the current count
     let questionObj = questions[counter];
@@ -68,12 +64,12 @@ class GameCard extends Component {
       if(answered_questions[counter]){
         let btn_color = val === correct_answer ? "primary" : "secondary"
         return (
-          <Button color={btn_color} key={i.toString()}>{val}</Button>
+          <Button id={`btn${i}`} color={btn_color} key={i.toString()}>{val}</Button>
         )
       }
       else {
         return (
-          <Button key={i.toString()} onClick={this.handleAnswerClick.bind(this, answers[i], answers_order)}>{val}</Button>
+          <Button id={`btn${i}`} key={i.toString()} onClick={this.handleAnswerClick.bind(this, answers[i], answers_order)}>{val}</Button>
         )
       }
     })

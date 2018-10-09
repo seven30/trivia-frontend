@@ -8,7 +8,7 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-const DELAY_MS = 800
+const DELAY_MS = 1200;
 
 const sleep = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
