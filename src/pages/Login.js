@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import AuthService from '../services';
 import Register from './Register';
 
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+
+//Styling for Login
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  dense: {
+    marginTop: 16
+  },
+  menu: {
+    width: 200
+  }
+});
 
 class Login extends Component {
     constructor(props) {
@@ -19,25 +40,36 @@ class Login extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         let { email, password } = this.state.user
         return (
             <main>
               <h3>Click <a href="./Register" >HERE</a> to create an account </h3>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
+              <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+
+                  <TextField
+                    id="outlined-email-input"
+                    label="Email"
+                    className={classes.textField}
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    margin="normal"
+                    variant="outlined"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                  <TextField
+                    id="outlined-password-input"
+                    label="Password"
+                    className={classes.textField}
+                    type="password"
+                    autoComplete="current-password"
+                    margin="normal"
+                    variant="outlined"
+                    value={password}
+                    onChange={this.handleChange}
+                  />
                 <input
                   type="submit"
                   value="Login"
@@ -78,8 +110,8 @@ class Login extends Component {
 				  })
 			  }
 			  return json
-		  })
-    }
+		})
+  }
 }
 
-export default Login
+export default withStyles(styles)(Login);
