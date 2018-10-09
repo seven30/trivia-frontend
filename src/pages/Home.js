@@ -12,6 +12,7 @@ import AuthService from '../services';
 
 const theme = createMuiTheme({
 
+//"palette" needed to change color of buttons
   palette: {
     primary: {main: '#000000'},
     secondary: {main: '#AED6F1'},
@@ -19,7 +20,6 @@ const theme = createMuiTheme({
   }
 })
 
-      // <div style={{ padding: "10vh" }}>
 class Home extends Component {
   constructor(props){
     super(props)
@@ -40,18 +40,14 @@ class Home extends Component {
         <Grid container direction= "column"
           justify= "space-evenly"
           alignItems= "center">
-            <Grid item>
               <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
-            </Grid>
-            <Grid item>
               <MuiThemeProvider theme={theme}>
+
                   {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play as Guest</Button>}
                   {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play a Game</Button>}
                   <LoginButton logout={this.logout.bind(this)}/>
               </MuiThemeProvider>
-            </Grid>
         </Grid>
-
     );
   }
 }
