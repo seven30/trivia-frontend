@@ -34,6 +34,7 @@ class UserDashboard extends Component {
     super(props)
     this.auth = new AuthService()
     this.state = {
+      username: '',
       gameHistories: []
     }
   }
@@ -43,7 +44,7 @@ class UserDashboard extends Component {
     let gameHistories = getGameHistory(userId)
     .then(gameHistories => {
       console.log("in did mount", gameHistories);
-      this.setState({gameHistories: gameHistories})
+      this.setState({gameHistories: gameHistories.history, username: gameHistories.username})
     });
   }
 
@@ -99,7 +100,7 @@ class UserDashboard extends Component {
         <TableHead>
           <TableRow>
             <StringTableCell>
-              <h3>Lifetime Score: {average}%</h3>
+              <h3>{this.state.username}&rsquo;s Lifetime Score: {average}%</h3>
             </StringTableCell>
           </TableRow>
         </TableHead>
