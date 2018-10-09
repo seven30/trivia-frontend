@@ -7,6 +7,7 @@ import Game from './pages/Game';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import GameModes from './pages/GameModes.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/game" component={Game}/>
+      <Route exact path="/gamemode" component={GameModes}/>
     </div>
   </Router>, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change

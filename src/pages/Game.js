@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { classicModeFetch } from '../api/trivia-api.js'
+import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
@@ -27,16 +27,23 @@ class Game extends Component {
   componentDidMount(){
     if(!this.state.questionsFetched){ // Check if data has already been fetched.
       //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
-      fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-      .then(res => {
-        //console.log(res);
-        res = res.json()
-        //console.log(res);
-        return res;
-      }).then(res => {
-        console.log(res.results);
-        this.setState({questionsFetched: true, questions: res.results});
-      })
+      //If props passed from game select
+      if(this.props.location.state){
+        let { num, category, difficulty } = this.props.location.state;
+        console.log("PROPS from mode", this.props);
+        let questions = triviaFetch(num, category, difficulty)
+        .then(res => {
+          console.log("first res", res);
+          this.setState({questionsFetched: true, questions: res});
+        })
+      } else {// If nothing is selected
+        let num, category, difficulty;
+        let questions = triviaFetch(num, category, difficulty)
+        .then(res => {
+          console.log("first res", res);
+          this.setState({questionsFetched: true, questions: res});
+        })
+      }
     }
   }
 
@@ -121,3 +128,17 @@ class Game extends Component {
 }
 
 export default Game;
+
+// if(!this.state.questionsFetched){ // Check if data has already been fetched.
+//   //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
+//   fetch("https://opentdb.com/api.php?amount=10&type=multiple")
+//   .then(res => {
+//     //console.log(res);
+//     res = res.json()
+//     //console.log(res);
+//     return res;
+//   }).then(res => {
+//     console.log(res.results);
+//     this.setState({questionsFetched: true, questions: res.results});
+//   })
+// }
