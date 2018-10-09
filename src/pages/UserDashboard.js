@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import AuthService from '../services';
 import { getGameHistory } from '../api/game-history-api';
-// import withAuth from '../components/withAuth.js'
+import withAuth from '../components/withAuth.js'
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -60,4 +60,4 @@ class UserDashboard extends Component {
     )
   }
 }
-  export default UserDashboard;
+  export default withAuth(UserDashboard);
