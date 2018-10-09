@@ -16,6 +16,7 @@ ReactDOM.render(
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/game" component={Game}/>
+
     </div>
   </Router>, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
