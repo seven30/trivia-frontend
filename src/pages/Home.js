@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import AuthService from '../services';
+
 const theme = createMuiTheme({
 
 //"palette" needed to change color of buttons
@@ -19,9 +21,17 @@ const theme = createMuiTheme({
 })
 
 class Home extends Component {
+  constructor(props){
+    super(props)
+    this.auth = new AuthService();
+  }
 
   handleClick(){
     this.props.history.push('/game');
+  }
+
+  logout(){
+    this.props.history.push('/');
   }
 
   render() {
@@ -32,10 +42,10 @@ class Home extends Component {
           alignItems= "center">
               <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
               <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" color="primary" size= "large" component={Link} to="/game">
-                  Play as Guest
-                  </Button>
-                  <LoginButton/>
+
+                  {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play as Guest</Button>}
+                  {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play a Game</Button>}
+                  <LoginButton logout={this.logout.bind(this)}/>
               </MuiThemeProvider>
         </Grid>
     );

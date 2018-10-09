@@ -114,6 +114,7 @@ class LoginButton extends Component {
         this.setState({
             loggedIn: false
         })
+        this.props.logout();
     }
 }
 
