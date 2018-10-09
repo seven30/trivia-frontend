@@ -19,10 +19,6 @@ const theme = createMuiTheme({
 });
 
 class GameCard extends Component {
-  constructor(props){
-    super(props)
-  }
-
   handleAnswerClick(answer, answers_order){
     //Run check answer in Game, send along the answer, and the current order of shuffled answers array.
     this.props.checkAnswer(answer, answers_order);
