@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Table } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
@@ -92,7 +92,7 @@ class Game extends Component {
             <h1>Game Done!</h1>
             <h2>Score: {score/questions.length*100}%</h2>
             <Button>Play Again</Button>
-            <Button>View Game History</Button>
+            <Button href='/dashboard'>View Game History</Button>
           </div>
         )
       } else {

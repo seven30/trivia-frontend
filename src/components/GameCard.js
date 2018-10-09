@@ -19,10 +19,6 @@ const theme = createMuiTheme({
 });
 
 class GameCard extends Component {
-  constructor(props){
-    super(props)
-  }
-
   handleAnswerClick(answer, answers_order){
     console.log(answer);
     let correct = this.props.questions[this.props.counter].correct_answer;
