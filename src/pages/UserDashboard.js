@@ -10,6 +10,7 @@ import AuthService from '../services';
 import { getGameHistory } from '../api/game-history-api';
 import withAuth from '../components/withAuth.js'
 
+//TableCell created specifically for numbers
 const NumericTableCell = withStyles(theme => ({
   head: {
     color: theme.palette.common.white,
@@ -20,6 +21,7 @@ const NumericTableCell = withStyles(theme => ({
   },
 }))(TableCell)
 
+//TableCell created specifically for strings
 const StringTableCell = withStyles(theme => ({
   head: {
     color: theme.palette.common.white,
@@ -32,6 +34,7 @@ const StringTableCell = withStyles(theme => ({
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
+
     this.auth = new AuthService()
     this.state = {
       username: '',
@@ -41,30 +44,51 @@ class UserDashboard extends Component {
 
   componentDidMount(){
     let userId = this.auth.getUserId()
+
+    //fetch the username and game_histories from the database
+    //gameHistories is an object containing {username: "username", history: {game_histories}}
     let gameHistories = getGameHistory(userId)
     .then(gameHistories => {
       console.log("in did mount", gameHistories);
-      this.setState({gameHistories: gameHistories.history, username: gameHistories.username})
+
+      //set the state of the UserDashboard component to information fetched from database
+      this.setState({
+        gameHistories: gameHistories.history,
+        username: gameHistories.username
+      })
     });
   }
 
+  //this function calculates the lifetime average of a players game histories
   calculateAverage = () => {
     let totalCorrect = 0;
     let totalAnswered = 0;
-    for (var i = 0; i < this.state.gameHistories.length; i++) {
-      totalCorrect = totalCorrect + this.state.gameHistories[i].correct_answers
-      totalAnswered = totalAnswered + this.state.gameHistories[i].total_questions
-      console.log("correct:", totalCorrect);
-      console.log("answered:", totalAnswered);
+    let { gameHistories } = this.state;
+
+    //loop through the gameHistories array
+    for (var i = 0; i < gameHistories.length; i++) {
+      //set the variable totalCorrect to the sum of totalAnswered and # of correct_answers per each game_history
+      totalCorrect = totalCorrect + gameHistories[i].correct_answers;
+      //set the variable totalAnswered to the sum of totalAnswered and # of total_questions per each game_history
+      totalAnswered = totalAnswered + gameHistories[i].total_questions;
     }
-    let average = Math.floor((totalCorrect/totalAnswered)*100)
-    console.log("average:", average);
-    return average
+    //calculate the average by dividing totalCorrect by totalAnswered, multiply by 100 and round it to the nearest whole number
+    let average = Math.floor((totalCorrect/totalAnswered)*100);
+
+    //if there is no average, set average to 0
+    if(!average) {
+      average = 0;
+    }
+
+    return average;
   }
 
   render() {
-    console.log("state", this.state.gameHistories);
-    let gameHistory = this.state.gameHistories.map((gameHistory, i) => {
+    let { username, gameHistories } = this.state;
+    let average = this.calculateAverage()
+
+    //map through the gameHistories state to display information in TableRows
+    let gameHistory = gameHistories.map((gameHistory, i) => {
       return(
         <TableRow key = {i.toString()}>
           <StringTableCell component="th" scope="row">
@@ -78,9 +102,10 @@ class UserDashboard extends Component {
         </TableRow>
       )
     })
-    let average = this.calculateAverage()
+
     return (
       <div>
+
         <TableHead>
           <TableRow>
             <StringTableCell>
@@ -88,6 +113,7 @@ class UserDashboard extends Component {
             </StringTableCell>
           </TableRow>
         </TableHead>
+
         <TableHead>
           <TableRow>
             <StringTableCell>Game Mode</StringTableCell>
@@ -96,14 +122,19 @@ class UserDashboard extends Component {
             <StringTableCell>Quiz Score</StringTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{gameHistory}</TableBody>
+
+        <TableBody>
+          {gameHistory}
+        </TableBody>
+
         <TableHead>
           <TableRow>
             <StringTableCell>
-              <h3>{this.state.username}&rsquo;s Lifetime Score: {average}%</h3>
+              <h3>{username}&rsquo;s Lifetime Score: {average}%</h3>
             </StringTableCell>
           </TableRow>
         </TableHead>
+
       </div>
     )
   }
