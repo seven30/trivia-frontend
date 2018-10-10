@@ -64,7 +64,7 @@ class RegisterPage extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault()
-		let { email, password } = this.state.form
+		let { username, email, password } = this.state.form
 
 		this.auth.register(this.state.form)
 		this.auth.login(email, password)
