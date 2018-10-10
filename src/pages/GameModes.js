@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
@@ -63,13 +63,32 @@ const CATEGORIES = {
 //   "Entertainment: Japanese Anime &amp; Manga": "31",
 //   "Entertainment: Cartoon & Animations": "32",
 // }
-
+const styles = theme => ({
+  container: {
+    // display: 'inline-flex',
+    // flexDirection: 'column',
+    // flexGrow: 1,
+    minHeight: '100vh',
+    minWidth: '100vw',
+  },
+  button: {
+    width: '30vw',
+    minWidth: '50px',
+    height: 'auto',
+    minHeight: '10vh',
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
+  }
+})
 
 class GameModes extends Component {
   constructor(props){
     super(props)
     this.state = {
-      category: {}
+      category: {},
+      categorySelected: false,
     }
   }
 
@@ -89,24 +108,39 @@ class GameModes extends Component {
   setCategory(categoryNum, categoryName){
     console.log(categoryNum);
     let category = { [categoryNum] : categoryName}
-    this.setState({category: category})
+    this.setState({category: category, categorySelected: true})
   }
 
   render(){
+    const { classes } = this.props;
     console.log(Object.entries(CATEGORIES));
     console.log("state in mode", this.state);
     let categories =  Object.entries(CATEGORIES).map((category, i) => {
+      let btn_type = category[1] === Object.values(this.state.category)[0] ? "contained" : "outlined";
       return (
-        <Button variant="contained" color="primary" onClick={this.setCategory.bind(this, category[0], category[1])}>{category[1]}</Button>
+        <Button className={classes.button} variant={btn_type} color="primary" onClick={this.setCategory.bind(this, category[0], category[1])}>{category[1]}</Button>
       )
     })
-    return (
-      <div>
-        {categories}
-        <Button color="secondary" onClick={this.startGame.bind(this)}>Start Game</Button>
-      </div>
-    )
+    if(this.state.categorySelected){
+      return (
+        <div className={classes.container}>
+          <Button className={classes.button} color="secondary" variant="contained" onClick={this.startGame.bind(this)}>Start Game</Button>
+          <div>
+            {categories}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className={classes.container}>
+          <Button className={classes.button} color="secondary" variant="outlined">Select Category</Button>
+          <div>
+            {categories}
+          </div>
+        </div>
+      )
+    }
   }
 }
 
-export default GameModes;
+export default withStyles(styles)(GameModes);

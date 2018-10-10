@@ -62,7 +62,7 @@ class GameCard extends Component {
       if(answered_questions[counter]){
         let btn_color = val === correct_answer ? "primary" : "secondary"
         return (
-          <Button id={`btn${i}`} variant="contained" color={btn_color} key={i.toString()}>{val}</Button>
+          <Button id={`btn${i}`} color={btn_color} key={i.toString()}>{val}</Button>
         )
       }
       else {

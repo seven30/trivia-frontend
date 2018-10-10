@@ -47,11 +47,12 @@ class Game extends Component {
       triviaFetch(num, categoryNum, difficulty).then(res => {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
-      })
+      });
     } else {
       triviaFetch(10, "", "").then(res => {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
+      });
     }
   }
 
