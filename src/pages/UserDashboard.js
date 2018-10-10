@@ -44,27 +44,39 @@ class UserDashboard extends Component {
     let gameHistories = getGameHistory(userId)
     .then(gameHistories => {
       console.log("in did mount", gameHistories);
-      this.setState({gameHistories: gameHistories.history, username: gameHistories.username})
+      this.setState({
+        gameHistories: gameHistories.history,
+        username: gameHistories.username
+      })
     });
   }
 
   calculateAverage = () => {
     let totalCorrect = 0;
     let totalAnswered = 0;
-    for (var i = 0; i < this.state.gameHistories.length; i++) {
-      totalCorrect = totalCorrect + this.state.gameHistories[i].correct_answers
-      totalAnswered = totalAnswered + this.state.gameHistories[i].total_questions
-      console.log("correct:", totalCorrect);
-      console.log("answered:", totalAnswered);
+    let { gameHistories } = this.state;
+
+    for (var i = 0; i < gameHistories.length; i++) {
+      totalCorrect = totalCorrect + gameHistories[i].correct_answers;
+      totalAnswered = totalAnswered + gameHistories[i].total_questions;
     }
-    let average = Math.floor((totalCorrect/totalAnswered)*100)
-    console.log("average:", average);
-    return average
+
+    let average = Math.floor((totalCorrect/totalAnswered)*100);
+
+    //if there is no average, set average to 0
+    if(!average) {
+      average = 0;
+    }
+
+    return average;
   }
 
   render() {
-    console.log("state", this.state.gameHistories);
-    let gameHistory = this.state.gameHistories.map((gameHistory, i) => {
+    let { username, gameHistories } = this.state;
+    let average = this.calculateAverage()
+
+
+    let gameHistory = gameHistories.map((gameHistory, i) => {
       return(
         <TableRow key = {i.toString()}>
           <StringTableCell component="th" scope="row">
@@ -78,9 +90,10 @@ class UserDashboard extends Component {
         </TableRow>
       )
     })
-    let average = this.calculateAverage()
+
     return (
       <div>
+
         <TableHead>
           <TableRow>
             <StringTableCell>
@@ -88,6 +101,7 @@ class UserDashboard extends Component {
             </StringTableCell>
           </TableRow>
         </TableHead>
+
         <TableHead>
           <TableRow>
             <StringTableCell>Game Mode</StringTableCell>
@@ -96,14 +110,19 @@ class UserDashboard extends Component {
             <StringTableCell>Quiz Score</StringTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{gameHistory}</TableBody>
+
+        <TableBody>
+          {gameHistory}
+        </TableBody>
+
         <TableHead>
           <TableRow>
             <StringTableCell>
-              <h3>{this.state.username}&rsquo;s Lifetime Score: {average}%</h3>
+              <h3>{username}&rsquo;s Lifetime Score: {average}%</h3>
             </StringTableCell>
           </TableRow>
         </TableHead>
+
       </div>
     )
   }
