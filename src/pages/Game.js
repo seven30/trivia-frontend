@@ -12,6 +12,7 @@ import TimerBar from '../components/TimerBar.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
+import Header from '../components/Header';
 
 
 class Game extends Component {
@@ -50,7 +51,7 @@ class Game extends Component {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       });
-    } 
+    }
   }
 
   checkAnswer(answer, answers_order){
@@ -104,6 +105,7 @@ class Game extends Component {
         this.saveGameHistory();
         return (
           <div>
+            <Header history={this.props.history}/>
             <h1 color="#FFFFFF">Game Done!</h1>
             <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
             <Button color="primary" href='/selectgame'>Play Again</Button>
@@ -113,6 +115,7 @@ class Game extends Component {
       } else { //If guest, show end page with results, do not save history.
         return (
           <div>
+            <Header history={this.props.history}/>
             <h1>Game Done!</h1>
             <h2>Score: {score/questions.length*100}%</h2>
             <Button color="primary"href='/selectgame'>Play Again</Button>
@@ -124,6 +127,7 @@ class Game extends Component {
     //If game ongoing, render GameCard to display questions, and answers.
     return (
     <div>
+      <Header history={this.props.history}/>
       {questionsFetched && <TimerBar questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />}
 
       { questionsFetched && <Timer questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
