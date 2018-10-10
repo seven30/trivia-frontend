@@ -16,7 +16,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {main: '#000000'},
     secondary: {main: '#AED6F1'},
-    type: 'dark',
+    // type: 'dark', //<---- gives dark theme when active
   }
 })
 
@@ -31,7 +31,7 @@ class Home extends Component {
   }
 
   logout(){
-    this.props.history.push('/');
+    //this.props.history.push('/');
   }
 
   render() {
@@ -42,10 +42,9 @@ class Home extends Component {
           alignItems= "center">
               <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
               <MuiThemeProvider theme={theme}>
-
-                  {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play as Guest</Button>}
-                  {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play a Game</Button>}
-                  <LoginButton logout={this.logout.bind(this)}/>
+                  {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/selectgame">Play as Guest</Button>}
+                  {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/selectgame">Play a Game</Button>}
+                  <LoginButton history={this.props.history} logout={this.logout.bind(this)}/>
               </MuiThemeProvider>
         </Grid>
     );
