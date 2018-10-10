@@ -48,6 +48,10 @@ class Game extends Component {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       })
+    } else {
+      triviaFetch(10, "", "").then(res => {
+        console.log(res);
+        this.setState({questionsFetched: true, questions: res});
     }
   }
 
