@@ -18,14 +18,14 @@ export default function withAuth(WrappedComponent) {
 
     componentDidMount(){
       if(!Auth.loggedIn()){
-        this.props.history.replace('/login')
+        this.props.history.replace('/')
       } else {
         try {
           const userId = Auth.getUserId();
           this.setState({userId: userId});
         } catch(err){
           Auth.logout();
-          this.props.history.replace('/login');
+          this.props.history.replace('/');
         }
       }
     }

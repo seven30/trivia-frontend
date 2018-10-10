@@ -106,7 +106,7 @@ class UserDashboard extends Component {
 
     return (
       <div>
-      <Header />
+      <Header history={this.props.history}/>
         <TableHead>
           <TableRow>
             <StringTableCell>

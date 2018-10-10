@@ -75,7 +75,7 @@ class Header extends React.Component {
             <Typography color="inherit" style={{ flex: 1 }}>
               <h2 style={{letterSpacing:'5px'}}> TRIVIA NIGHT! </h2>
             </Typography>
-            <Button variant="h6" color="inherit" component={Link} to="/game">
+            <Button variant="h6" color="inherit" component={Link} to="/selectgame">
               Play a Game
             </Button>
             <HomeIcon className={classes.icon}/>
@@ -105,7 +105,7 @@ class Header extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem component={Link} to="/dashboard">Profile</MenuItem>
-                  <MenuItem component={LoginButton} ></MenuItem>
+                  <MenuItem history={this.props.history} component={LoginButton}></MenuItem>
                 </Menu>
               </div>
             )}
