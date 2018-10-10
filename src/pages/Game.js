@@ -26,19 +26,12 @@ class Game extends Component {
   }
 
   componentDidMount(){
-    // if(!this.state.questionsFetched){ // Check if data has already been fetched.
-    //   //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
-    //   fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-    //   .then(res => {
-    //     //console.log(res);
-    //     res = res.json()
-    //     //console.log(res);
-    //     return res;
-    //   }).then(res => {
-    //     console.log(res.results);
-    //     this.setState({questionsFetched: true, questions: res.results});
-    //   })
-    // }
+    if(!this.props.location.state){
+      triviaFetch(10, "", "").then(res => {
+        console.log(res);
+        this.setState({questionsFetched: true, questions: res});
+      });
+    }
     if(this.props.location.state){
       let { num, category, difficulty } = this.props.location.state;
       let categoryNum = Object.keys(category);
@@ -48,12 +41,7 @@ class Game extends Component {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       });
-    } else {
-      triviaFetch(10, "", "").then(res => {
-        console.log(res);
-        this.setState({questionsFetched: true, questions: res});
-      });
-    }
+    } 
   }
 
   checkAnswer(answer, answers_order){
