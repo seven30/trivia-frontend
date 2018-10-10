@@ -13,7 +13,11 @@ class Game extends Component {
     super(props)
     this.Auth = new AuthService();
     this.gameMode = "Classic";
-    this.category = Object.values(this.props.location.state.category)[0];
+    if(this.props.location.state){
+      this.category = Object.values(this.props.location.state.category)[0];
+    } else {
+      this.category = "Random";
+    }
     this.state = {
       questions: [],
       counter: 0,
