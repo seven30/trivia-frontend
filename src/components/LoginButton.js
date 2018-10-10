@@ -15,8 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Router } from 'react-router-dom';
 
- // {(this.state.loggedIn) && <Redirect to="/protected" />}
-
 
 //function handles the Modal size
 function getModalStyle() {
@@ -29,14 +27,6 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-//withStyles for buttons
-const theme = createMuiTheme({
-  palette: {
-    primary: {main: '#000000'},
-    secondary: {main: '#AED6F1'},
-    type: 'dark',
-  }
-})
 
 //withStyles for modal
 const styles = theme => ({
@@ -46,20 +36,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  TextField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  dense: {
-    marginTop: 16,
-  },
-  menu: {
-    width: 200,
   },
 })
 

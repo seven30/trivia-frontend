@@ -16,7 +16,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {main: '#000000'},
     secondary: {main: '#AED6F1'},
-    type: 'dark',
+    // type: 'dark', //<---- gives dark theme when active
   }
 })
 
