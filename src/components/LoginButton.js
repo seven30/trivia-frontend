@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { Router } from 'react-router-dom';
 
  // {(this.state.loggedIn) && <Redirect to="/protected" />}
 
@@ -69,6 +70,7 @@ let initialStatus = auth.loggedIn()
 class LoginButton extends Component {
     constructor(props) {
         super(props)
+        this.auth = new AuthService();
         this.state = {
           loggedIn: initialStatus,
           open: false
@@ -79,34 +81,28 @@ class LoginButton extends Component {
     this.setState({open: true})
   }
 
-  handleClose = () => {
-    this.setState({open: false})
+  handleClose(){
+    this.props.history.push('/');
+    this.setState({open: false, loggedIn: true})
   }
 
-
     render() {
+      console.log("LB", this.props);
       const { classes } = this.props;
-      if(this.state.status || auth.loggedIn()){
-        return (
-          <div>
-            <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
-              {(!this.state.loggedIn) && <Redirect to="/login" />}
+      return (
+        <div>
+          {this.auth.loggedIn() && <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>}
+          {!this.auth.loggedIn() && <Button size= "large" variant="contained" color="primary" onClick={this.handleOpen.bind(this)}> Login </Button>}
+            <Modal
+              open={this.state.open}
+              onClose={this.handleClose.bind(this)}
+            >
+              <div style={getModalStyle()}className={classes.paper}>
+                <Login history={this.props.history} closeModal={this.handleClose.bind(this)}/>
+                </div>
+            </Modal>}
           </div>
-        )} else {
-          return(
-            <div>
-              <Button size= "large" variant="contained" color="primary" onClick={this.handleOpen}> Login </Button>
-                <Modal
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                >
-                  <div style={getModalStyle()}className={classes.paper}>
-                    <Login/>
-                    </div>
-                </Modal>
-            </div>
-          )
-        }
+        )
     }
 
     logout = () => {
@@ -114,7 +110,7 @@ class LoginButton extends Component {
         this.setState({
             loggedIn: false
         })
-        this.props.logout();
+        this.props.history.push('/');
     }
 }
 

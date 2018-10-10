@@ -7,15 +7,16 @@ import Game from './pages/Game';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-<<<<<<< HEAD
+import LoginButton from './components/LoginButton';
 import GameModes from './pages/GameModes.js';
-=======
 import UserDashboard from './pages/UserDashboard';
->>>>>>> master
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const history = createBrowserHistory();
 
 ReactDOM.render(
-  <Router>
+  <Router history={history}>
     <div>
       <Route exact path="/" component={Home}/>
       <Route exact path="/login" component={Login}/>

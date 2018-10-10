@@ -64,6 +64,7 @@ class Login extends Component {
                     label="Password"
                     className={classes.textField}
                     type="password"
+                    name="password"
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
@@ -103,7 +104,7 @@ class Login extends Component {
       this.auth.login(this.state)
       .then(json => {
 			  console.log("handling any errors");
-        this.props.history.replace('/')
+        //this.props.history.replace('/')
 			  if(json.errors) {
 				  this.setState({
 					  errors: json.errors
@@ -111,6 +112,7 @@ class Login extends Component {
 			  }
 			  return json
 		})
+    this.props.closeModal();
   }
 }
 
