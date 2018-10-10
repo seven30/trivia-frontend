@@ -106,7 +106,7 @@ class Game extends Component {
           <div>
             <h1 color="#FFFFFF">Game Done!</h1>
             <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
-            <Button color="primary" href='/game'>Play Again</Button>
+            <Button color="primary" href='/selectgame'>Play Again</Button>
             <Button color="primary" href='/dashboard'>View Game History</Button>
           </div>
         )
