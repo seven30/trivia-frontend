@@ -31,8 +31,7 @@ class Game extends Component {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       });
-    }
-    if(this.props.location.state){
+    } else {
       let { num, category, difficulty } = this.props.location.state;
       let categoryNum = Object.keys(category);
       let categoryName = Object.values(category);
