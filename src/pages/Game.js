@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, Table } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { classicModeFetch } from '../api/trivia-api.js'
+import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
 
@@ -17,6 +17,11 @@ class Game extends Component {
     super(props)
     this.Auth = new AuthService();
     this.gameMode = "Classic";
+    if(this.props.location.state){
+      this.category = Object.values(this.props.location.state.category)[0];
+    } else {
+      this.category = "Random";
+    }
     this.state = {
       questions: [],
       counter: 0,
@@ -29,19 +34,21 @@ class Game extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.questionsFetched){ // Check if data has already been fetched.
-      //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
-      fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-      .then(res => {
-        //console.log(res);
-        res = res.json()
-        //console.log(res);
-        return res;
-      }).then(res => {
-        console.log(res.results);
-        this.setState({questionsFetched: true, questions: res.results});
-      })
-    }
+    if(!this.props.location.state){
+      triviaFetch(10, "", "").then(res => {
+        console.log(res);
+        this.setState({questionsFetched: true, questions: res});
+      });
+    } else {
+      let { num, category, difficulty } = this.props.location.state;
+      let categoryNum = Object.keys(category);
+      let categoryName = Object.values(category);
+      console.log("num",num,"category",category,"difficulty",difficulty,"catNum", categoryNum, "catName", categoryName);
+      triviaFetch(num, categoryNum, difficulty).then(res => {
+        console.log(res);
+        this.setState({questionsFetched: true, questions: res});
+      });
+    } 
   }
 
   checkAnswer(answer, answers_order){
@@ -75,9 +82,10 @@ class Game extends Component {
 
   saveGameHistory(){
     //create a game history object
+    console.log(this.category);
     let game_history = {
       user_id: this.Auth.getUserId(),
-      game_mode: this.gameMode,
+      game_mode: this.category,
       correct_answers: this.state.score,
       total_questions: this.state.questions.length
     }

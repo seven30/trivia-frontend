@@ -17,7 +17,7 @@ const shuffle = function(arr){
 }
 
 //ARRAY OF UNICODES AND THEIR APPROPRIATE CHARACTERS
-const unicode = [[/&quot;/g, '"'],[/&#039;/g, "'"],[/&amp;/g, '&'],[/&HELLIP;/g, '...'],[/&LDQUO;/g, '"'], [/&RDQUO;/g, '"'], [/&Uuml/g, 'µ'],[/&uuml/g, 'µ'],[/&eacute;/g, 'é'], [/&RSQUO;/g, "'"], [/&deg;/g,'°'], [/&OACUTE;/g, ''], [/&shy;/g, '-'],[/&OACUTE/g,'Ó']];
+const unicode = [[/&#039;|&prime;|&Rsquo;|&rsquo;|&lsquo;|&Lsquo;|&RSQUO;|&LSQUO;/g, "'"],[/&amp;|&AMP;|&Amp;/g, '&'],[/&HELLIP;|&hellip;|&Hellip;/g, '...'],[/&LDQUO;|&RDQUO;|&ldquo;|&rdquo;|&quot;|&Prime;/g, '"'], [/&Uuml/g, 'Ü'],[/&uuml/g, 'ü'],[/&eacute;/g, 'é'], [/&Rsquo;|&rsquo;/g, "'"], [/&deg;/g,'°'], [/&oacute;/g, 'ó'], [/&Oacute/g,'Ó'],[/&shy;/g, '-'], [/&Ouml;/g,"Ö"],[/&ouml;/g, "ö"],[/&Auml;/g,"Ä"],[/&auml;/g, "ä"],[/&Aring;/g,"Å"],[/&aring;/g, "å"] ];
 
 //Replaces unicode in a string with appropriate character
 const replaceUnicode = function(str){

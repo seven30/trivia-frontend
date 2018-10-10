@@ -65,6 +65,7 @@ class Login extends Component {
                     className={classes.textField}
                     type="password"
                     name="password"
+                    autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
                     value={password}
@@ -111,6 +112,7 @@ class Login extends Component {
 			  }
 			  return json
 		})
+    this.props.closeModal();
   }
 }
 

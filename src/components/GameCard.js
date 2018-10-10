@@ -75,6 +75,7 @@ class GameCard extends Component {
       <div className="gamepage">
         <Card className="card">
           <CardContent>
+            <h4>{questionObj.category}</h4>
             <p>{question}</p>
             <MuiThemeProvider theme={theme}>
               {answer}
