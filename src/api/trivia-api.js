@@ -13,7 +13,7 @@ let classicModeFetch = function(num){
 }
 
 let triviaFetch = function(num = "", category = "", difficulty = ""){
-  category = category === "" ? "" : "&category=" + category;
+  category = category === "" || category === "0" ? "" : "&category=" + category;
   difficulty = difficulty === "" ? "" : "&difficulty=" + difficulty;
   num = num === "" ? "amount=10" : "amount=" + num;
   console.log("num", num, "category", category, "difficulty", difficulty);

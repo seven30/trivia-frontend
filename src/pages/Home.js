@@ -42,8 +42,8 @@ class Home extends Component {
           alignItems= "center">
               <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
               <MuiThemeProvider theme={theme}>
-                  {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play as Guest</Button>}
-                  {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/game">Play a Game</Button>}
+                  {!this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/selectgame">Play as Guest</Button>}
+                  {this.auth.loggedIn() && <Button variant="contained" color="primary" size= "large" component={Link} to="/selectgame">Play a Game</Button>}
                   <LoginButton history={this.props.history} logout={this.logout.bind(this)}/>
               </MuiThemeProvider>
         </Grid>

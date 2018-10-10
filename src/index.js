@@ -22,7 +22,7 @@ ReactDOM.render(
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/game" component={Game}/>
-      <Route exact path="/gamemode" component={GameModes}/>
+      <Route exact path="/selectgame" component={GameModes}/>
       <Route exact path="/dashboard" component={UserDashboard}/>
     </div>
   </Router>, document.getElementById('root'));

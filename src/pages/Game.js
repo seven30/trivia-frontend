@@ -13,6 +13,7 @@ class Game extends Component {
     super(props)
     this.Auth = new AuthService();
     this.gameMode = "Classic";
+    this.category = Object.values(this.props.location.state.category)[0];
     this.state = {
       questions: [],
       counter: 0,
@@ -25,25 +26,28 @@ class Game extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.questionsFetched){ // Check if data has already been fetched.
-      //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
-      //If props passed from game select
-      if(this.props.location.state){
-        let { num, category, difficulty } = this.props.location.state;
-        console.log("PROPS from mode", this.props);
-        let questions = triviaFetch(num, category, difficulty)
-        .then(res => {
-          console.log("first res", res);
-          this.setState({questionsFetched: true, questions: res});
-        })
-      } else {// If nothing is selected
-        let num, category, difficulty;
-        let questions = triviaFetch(num, category, difficulty)
-        .then(res => {
-          console.log("first res", res);
-          this.setState({questionsFetched: true, questions: res});
-        })
-      }
+    // if(!this.state.questionsFetched){ // Check if data has already been fetched.
+    //   //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
+    //   fetch("https://opentdb.com/api.php?amount=10&type=multiple")
+    //   .then(res => {
+    //     //console.log(res);
+    //     res = res.json()
+    //     //console.log(res);
+    //     return res;
+    //   }).then(res => {
+    //     console.log(res.results);
+    //     this.setState({questionsFetched: true, questions: res.results});
+    //   })
+    // }
+    if(this.props.location.state){
+      let { num, category, difficulty } = this.props.location.state;
+      let categoryNum = Object.keys(category);
+      let categoryName = Object.values(category);
+      console.log("num",num,"category",category,"difficulty",difficulty,"catNum", categoryNum, "catName", categoryName);
+      triviaFetch(num, categoryNum, difficulty).then(res => {
+        console.log(res);
+        this.setState({questionsFetched: true, questions: res});
+      })
     }
   }
 
@@ -78,9 +82,10 @@ class Game extends Component {
 
   saveGameHistory(){
     //create a game history object
+    console.log(this.category);
     let game_history = {
       user_id: this.Auth.getUserId(),
-      game_mode: this.gameMode,
+      game_mode: this.category,
       correct_answers: this.state.score,
       total_questions: this.state.questions.length
     }
@@ -128,17 +133,3 @@ class Game extends Component {
 }
 
 export default Game;
-
-// if(!this.state.questionsFetched){ // Check if data has already been fetched.
-//   //fetch trivia questions from opentb API : Random 10 questions, Random category, and difficulty
-//   fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-//   .then(res => {
-//     //console.log(res);
-//     res = res.json()
-//     //console.log(res);
-//     return res;
-//   }).then(res => {
-//     console.log(res.results);
-//     this.setState({questionsFetched: true, questions: res.results});
-//   })
-// }
