@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles, Table } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
+
 
 class Game extends Component {
   constructor(props){
@@ -101,7 +103,7 @@ class Game extends Component {
           <div>
             <h1>Game Done!</h1>
             <h2>Score: {score/questions.length*100}%</h2>
-            <Button>Play Again</Button>
+            <Button color="primary"href='/selectgame'>Play Again</Button>
           </div>
         )
       }

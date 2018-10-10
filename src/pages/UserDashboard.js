@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import AuthService from '../services';
 import { getGameHistory } from '../api/game-history-api';
 import withAuth from '../components/withAuth.js'
+import Header from '../components/Header'
 
 //TableCell created specifically for numbers
 const NumericTableCell = withStyles(theme => ({
@@ -105,7 +106,7 @@ class UserDashboard extends Component {
 
     return (
       <div>
-
+      <Header />
         <TableHead>
           <TableRow>
             <StringTableCell>
