@@ -14,8 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
- // {(this.state.loggedIn) && <Redirect to="/protected" />}
-
 
 //function handles the Modal size
 function getModalStyle() {
@@ -28,14 +26,6 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-//withStyles for buttons
-const theme = createMuiTheme({
-  palette: {
-    primary: {main: '#000000'},
-    secondary: {main: '#AED6F1'},
-    type: 'dark',
-  }
-})
 
 //withStyles for modal
 const styles = theme => ({
@@ -45,20 +35,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  TextField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  dense: {
-    marginTop: 16,
-  },
-  menu: {
-    width: 200,
   },
 })
 
@@ -90,7 +66,7 @@ class LoginButton extends Component {
         return (
           <div>
             <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>
-              {(!this.state.loggedIn) && <Redirect to="/login" />}
+              {(!this.state.loggedIn) && <Redirect to="/" />}
           </div>
         )} else {
           return(

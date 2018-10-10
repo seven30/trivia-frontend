@@ -15,23 +15,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Router>
-          {(auth.loggedIn())
-          //if logged in
-          ? <Switch>
-            <Route exact path='/' component={Home} / >
-            <Route exact path='/game' component={Game} / >
-          </Switch>
-          //if not logged in
-          : <Switch>
-            <Route exact path='/' component={Home} / >
-            <Route exact path='/login' component={Login} / >
-            <Route exact path='/register' component={Register} / >
-            <Route exact path='/gameguest' component={Game} / >
-            <Redirect from='/game' to='/Login' / >
-          </Switch>
-        }
-        </Router>
       </div>
     );
   }

@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button';
 import { classicModeFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
+
+////just for experimentation
+import TimerBar from '../components/TimerBar.js'
+////////////////////////////
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
@@ -110,6 +114,7 @@ class Game extends Component {
     //If game ongoing, render GameCard to display questions, and answers.
     return (
     <div>
+      {questionsFetched && <TimerBar questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />}
 
       { questionsFetched && <Timer questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}
 

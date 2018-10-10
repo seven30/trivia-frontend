@@ -43,12 +43,12 @@ class Login extends Component {
         const { classes } = this.props;
         let { email, password } = this.state.user
         return (
-            <main>
+            <div>
               <h3>Click <a href="./Register" >HERE</a> to create an account </h3>
               <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
 
                   <TextField
-                    id="outlined-email-input"
+                    id="email-input"
                     label="Email"
                     className={classes.textField}
                     type="email"
@@ -60,11 +60,11 @@ class Login extends Component {
                     onChange={this.handleChange}
                   />
                   <TextField
-                    id="outlined-password-input"
+                    id="oulined-password-input"
                     label="Password"
                     className={classes.textField}
                     type="password"
-                    autoComplete="current-password"
+                    name="password"
                     margin="normal"
                     variant="outlined"
                     value={password}
@@ -75,7 +75,7 @@ class Login extends Component {
                   value="Login"
                 />
               </form>
-            </main>
+            </div>
         )
     }
 
@@ -102,8 +102,8 @@ class Login extends Component {
       // this function requires an email and password
       this.auth.login(this.state)
       .then(json => {
-			  console.log("handling any errors");
-        this.props.history.replace('/')
+			  console.log("handling any errors", this.props);
+        //this.props.history.replace('/')
 			  if(json.errors) {
 				  this.setState({
 					  errors: json.errors
