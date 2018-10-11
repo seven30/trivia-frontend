@@ -4,7 +4,7 @@ import { withStyles, Table } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
-import Timer from '../components/timer.js';
+import Timer from '../components/Timer.js';
 import GameResults from '../components/GameResults';
 ////just for experimentation
 import TimerBar from '../components/TimerBar.js'
