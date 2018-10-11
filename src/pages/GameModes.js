@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
@@ -42,9 +42,6 @@ const CATEGORIES = {
 
 const styles = theme => ({
   container: {
-    // display: 'inline-flex',
-    // flexDirection: 'column',
-    // flexGrow: 1,
     minHeight: '100vh',
     minWidth: '100vw',
     marginLeft: 'auto',

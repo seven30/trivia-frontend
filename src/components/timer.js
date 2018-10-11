@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Card from '@material-ui/core/Card';
-
-
 import '../pages/Game.css';
-const ms = require('pretty-ms')
-//format using a library called ‘pretty-ms’ which converts milliseconds to a neat formatted string. We simply run npm install pretty-ms --save and import it to our project with const ms = require(‘pretty-ms’). Now ms(this.state.time) will give you a pretty formatted string with the pattern ‘hh:mm:ss’.
-
 
 class Timer extends Component {
   constructor(props){
@@ -35,7 +29,8 @@ class Timer extends Component {
       if (this.state.time<0) {
         this.setState({time: 0, isOn: false})
         clearInterval(this.timer)
-        this.props.checkAnswer(this.props.answers, this.props.answers_order)
+        //Supplied a default string for checkAnswer in the case that the player runs out of time and does not actually choose an answer.
+        this.props.checkAnswer("You did not answer.", this.props.answers_order)
       }
 
 
@@ -64,14 +59,11 @@ class Timer extends Component {
     }
     if (this.props.counter !== prevProps.counter) {
       this.resetTimer()
-      console.log("::RESET::");
-      console.log(this.state.time);
       this.startTimer()
     }
   }
 
   render(){
-    const { classes } = this.props
     return (
       <div>
 
@@ -80,8 +72,3 @@ class Timer extends Component {
   }
 }
 export default Timer;
-// <div onClick>
-// <Card>
-// <h3 onClick>Time Left: {ms(this.state.time)}</h3>
-// </Card>
-// </div>

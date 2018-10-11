@@ -45,10 +45,8 @@ class TimerBar extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.questionIsAnswered !== prevProps.questionIsAnswered) {
-      console.log("::STOP TIMERBARRRRRRRR::");
       this.stopTimer();
-      this.resetTimer()
-      console.log("::RESET TIMERBARRRRRR::");
+      this.resetTimer();
     }
     if (this.props.counter !== prevProps.counter) {
       this.startTimer()

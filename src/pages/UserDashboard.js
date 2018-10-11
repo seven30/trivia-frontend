@@ -1,11 +1,6 @@
 import React, {  Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
+import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import AuthService from '../services';
 import { getGameHistory } from '../api/game-history-api';
 import withAuth from '../components/withAuth.js'
@@ -50,8 +45,6 @@ class UserDashboard extends Component {
     //gameHistories is an object containing {username: "username", history: {game_histories}}
     let gameHistories = getGameHistory(userId)
     .then(gameHistories => {
-      console.log("in did mount", gameHistories);
-
       //set the state of the UserDashboard component to information fetched from database
       this.setState({
         gameHistories: gameHistories.history,

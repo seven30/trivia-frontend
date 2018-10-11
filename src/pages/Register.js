@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect, Link } from 'react-router-dom'
 import AuthService from '../services'
 
 class RegisterPage extends Component {
@@ -31,6 +30,7 @@ class RegisterPage extends Component {
 						name="username"
 						value={username}
 						onChange={this.onChange}
+						required
 					/>
 					<input
             placeholder="Email"
@@ -38,6 +38,7 @@ class RegisterPage extends Component {
 						name="email"
 						value={email}
 						onChange={this.onChange}
+						required
 					/>
 					{this.state.errors.email && <div>Error: Email  {this.state.errors.email[0]}</div>}
 					<input
@@ -46,6 +47,7 @@ class RegisterPage extends Component {
 						name="password"
 						value={password}
 						onChange={this.onChange}
+						required
 					/>
 					{this.state.errors.password && <div>Error: Password  {this.state.errors.password[0]}</div>}
 					<button onSubmit={this.onSubmit}>Register</button>
@@ -70,7 +72,7 @@ class RegisterPage extends Component {
 		this.auth.login(email, password)
 		.then(json => {
 			console.log("handling any errors");
-			this.props.history.replace('/game')
+			this.props.history.replace('/selectgame')
 			if(json.errors) {
 				this.setState({
 					errors: json.errors
