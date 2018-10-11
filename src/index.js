@@ -4,7 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Game from './pages/Game';
 import Home from './pages/Home';
-import Register from './pages/Register';
+import Register from './pages/NewRegister';
 import Login from './pages/Login';
 import GameModes from './pages/GameModes.js';
 import UserDashboard from './pages/UserDashboard';
