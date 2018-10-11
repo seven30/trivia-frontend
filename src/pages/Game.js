@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import GameCard from '../components/GameCard';
-import Timer from '../components/timer.js'
+import Timer from '../components/Timer.js';
+import GameResults from '../components/GameResults';
 import TimerBar from '../components/TimerBar.js'
 import { replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
@@ -59,11 +60,11 @@ class Game extends Component {
     //Check passed in answer against the correct answer
     if(answer === correct){
       //set answered_question correct true
-      answered_question = { question_idx: counter, answered_correctly: true };
+      answered_question = { question_idx: counter, answered_correctly: true, players_answer: answer };
       score++;
     } else {
       //set answered_question correct false
-      answered_question = { question_idx: counter, answered_correctly: false};
+      answered_question = { question_idx: counter, answered_correctly: false, players_answer: answer};
     }
     let { answered_questions } = this.state;
     answered_questions[counter] = answered_question;
@@ -95,27 +96,15 @@ class Game extends Component {
     //If counter has reached the end of the questions render end page.
     if(counter !== 0 && counter === questions.length){
       //If user is logged in, save game history.
-      if(this.Auth.loggedIn()){
+      if (this.Auth.loggedIn()) {
         this.saveGameHistory();
-        return (
-          <div>
-            <Header history={this.props.history}/>
-            <h1 color="#FFFFFF">Game Done!</h1>
-            <h2 color="#FFFFFF">Score: {score/questions.length*100}%</h2>
-            <Button color="primary" href='/selectgame'>Play Again</Button>
-            <Button color="primary" href='/dashboard'>View Game History</Button>
-          </div>
-        )
-      } else { //If guest, show end page with results, do not save history.
-        return (
-          <div>
-            <Header history={this.props.history}/>
-            <h1>Game Done!</h1>
-            <h2>Score: {score/questions.length*100}%</h2>
-            <Button color="primary"href='/selectgame'>Play Again</Button>
-          </div>
-        )
       }
+      return (
+        <div>
+          <Header history={this.props.history}/>
+          <GameResults questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} score={score} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />)
+        </div>
+      )
     }
     console.log("STATE", this.state);
     //If game ongoing, render GameCard to display questions, and answers.

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Card from '@material-ui/core/Card';
 import '../pages/Game.css';
 
 class Timer extends Component {
@@ -26,7 +29,8 @@ class Timer extends Component {
       if (this.state.time<0) {
         this.setState({time: 0, isOn: false})
         clearInterval(this.timer)
-        this.props.checkAnswer(this.props.answers, this.props.answers_order)
+        //Supplied a default string for checkAnswer in the case that the player runs out of time and does not actually choose an answer.
+        this.props.checkAnswer("You did not answer.", this.props.answers_order)
       }
 
 
@@ -55,8 +59,6 @@ class Timer extends Component {
     }
     if (this.props.counter !== prevProps.counter) {
       this.resetTimer()
-      console.log("::RESET::");
-      console.log(this.state.time);
       this.startTimer()
     }
   }
