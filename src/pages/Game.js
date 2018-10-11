@@ -4,7 +4,7 @@ import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js';
 import GameResults from '../components/GameResults';
 import TimerBar from '../components/TimerBar.js'
-import { replaceUnicode } from '../helper_functions/helper-functions.js';
+import { replaceUnicode, shuffle } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
 import { triviaFetch } from '../api/trivia-api.js'
@@ -16,7 +16,7 @@ class Game extends Component {
     super(props)
     this.Auth = new AuthService();
     this.gameMode = "Classic";
-    //Set the current category type, if multiple category is Mixed, otherwise, it's the category picked by user. 
+    //Set the current category type, if multiple category is Mixed, otherwise, it's the category picked by user.
     if(this.props.location.state.categoryNums.length > 1){
       this.category = "Mixed Categories";
     } else {
