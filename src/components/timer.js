@@ -35,7 +35,8 @@ class Timer extends Component {
       if (this.state.time<0) {
         this.setState({time: 0, isOn: false})
         clearInterval(this.timer)
-        this.props.checkAnswer(this.props.answers, this.props.answers_order)
+        console.log('::TIMER PROPS ANSWERS ORDER', this.props.answers_order);
+        this.props.checkAnswer("You did not answer.", this.props.answers_order)
       }
 
 
@@ -64,8 +65,6 @@ class Timer extends Component {
     }
     if (this.props.counter !== prevProps.counter) {
       this.resetTimer()
-      console.log("::RESET::");
-      console.log(this.state.time);
       this.startTimer()
     }
   }
