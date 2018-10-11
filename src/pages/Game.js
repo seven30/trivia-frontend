@@ -63,11 +63,11 @@ class Game extends Component {
     //Check passed in answer against the correct answer
     if(answer === correct){
       //set answered_question correct true
-      answered_question = { question_idx: counter, answered_correctly: true };
+      answered_question = { question_idx: counter, answered_correctly: true, players_answer: answer };
       score++;
     } else {
       //set answered_question correct false
-      answered_question = { question_idx: counter, answered_correctly: false};
+      answered_question = { question_idx: counter, answered_correctly: false, players_answer: answer};
     }
     let { answered_questions } = this.state;
     answered_questions[counter] = answered_question;

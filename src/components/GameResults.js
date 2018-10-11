@@ -4,6 +4,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AuthService from '../services';
+import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import '../pages/Game.css';
 import './GameCard.css';
 
@@ -26,6 +27,7 @@ class GameResults extends Component {
   render(){
 
     let { questions, counter, answered_questions, answers_order, score} = this.props;
+    //Created a bunch of snarky comments to be displayed to player after the game ends, based on their score.
     let messages = ["Are you cereal? You couldn't even get one right?", "Hey, it's OK. I forgot everything I learned in college too.", "A calculator could do better than you.", "Good job!", "Better than Dwight's free throw percentage I guess...", "Don't quit your day job, pal.", "That's perfect, Average Joe!", "Wow. Just... like... Wow.", "Were you blowing compressed air at your face?", "Congratulations! You know how to use Google."]
     let final_score = score/questions.length*100
     let message = ''
@@ -50,6 +52,39 @@ class GameResults extends Component {
     } else if (final_score===100) {
       message = messages[9]
     }
+
+    {/*Create an array that contains Result objects for each question. Each result object will contain the question text, the correct answer for that question, and the player's actual answer.*/}
+    let results = [];
+    for (var i = 0; i < questions.length; i++) {
+      results.push({question:'',correct:'',players:''})
+    }
+    {/*Updating each results object to receive the actual data contained in this.props*/}
+    results.forEach((val,i)=>{
+      val.question = questions[i].question
+      val.correct = questions[i].correct_answer
+      val.players = answered_questions[i].players_answer
+    })
+
+    {/*Used .map to clean up result objects as well as turn them into Cards to be rendered*/}
+    let resultCards = results.map((val,i) => {
+      val.question = replaceUnicode(val.question);
+      val.correct = replaceUnicode(val.correct);
+      val.players = replaceUnicode(val.players);
+      return (
+        <Card>
+          <CardContent>
+            Question: {val.question}
+          </CardContent>
+          <CardContent>
+            Correct Answer: {val.correct}
+          </CardContent>
+          <CardContent>
+            Your Answer: {val.players}
+          </CardContent>
+        </Card>
+      )
+    })
+
     if(this.Auth.loggedIn()){
       return (
         <Card >
@@ -58,6 +93,9 @@ class GameResults extends Component {
             <h2 color="primary">Score: {final_score}%</h2>
             <Button color="primary" href='/selectgame'>Play Again</Button>
             <Button color="primary" href='/dashboard'>View Game History</Button>
+          </CardContent>
+          <CardContent>
+            {resultCards}
           </CardContent>
         </Card>
       )
@@ -69,6 +107,9 @@ class GameResults extends Component {
             <h2 color="primary">Score: {final_score}%</h2>
             <Button color="primary" href='/selectgame'>Play Again</Button>
             <Button color="primary" href='/register'>Register here to save your scores!</Button>
+          </CardContent>
+          <CardContent>
+            {resultCards}
           </CardContent>
         </Card>
       )
