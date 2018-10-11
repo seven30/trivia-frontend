@@ -4,7 +4,6 @@ import Login from '../pages/Login.js';
 import { Link } from 'react-router-dom'
 import { Modal, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'
 
 //function handles the Modal size
 function getModalStyle() {
