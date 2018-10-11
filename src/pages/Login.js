@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import AuthService from '../services';
-import Register from './Register';
-
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
@@ -38,13 +36,13 @@ class Login extends Component {
             }
         }
     }
+    // <h3>Click <a href="./Register" >HERE</a> to create an account </h3>
 
     render() {
         const { classes } = this.props;
         let { email, password } = this.state.user
         return (
             <div>
-              <h3>Click <a href="./Register" >HERE</a> to create an account </h3>
               <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
 
                   <TextField
