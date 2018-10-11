@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
-import GameCard from '../components/GameCard';
-import Timer from '../components/timer.js'
-import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
-import AuthService from '../services';
-import { createGameHistory } from '../api/game-history-api';
-import Game from './Game';
 
 const CATEGORIES = {
   "0": "Random",
@@ -39,9 +32,6 @@ const CATEGORIES = {
 
 const styles = theme => ({
   container: {
-    // display: 'inline-flex',
-    // flexDirection: 'column',
-    // flexGrow: 1,
     minHeight: '100vh',
     minWidth: '100vw',
   },

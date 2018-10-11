@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Card from '@material-ui/core/Card';

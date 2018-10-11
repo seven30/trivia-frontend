@@ -1,10 +1,9 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  AppBar, Toolbar, Typography, Button, IconButton, Switch, FormControlLabel, FormGroup, Menu, MenuItem, SvgIcon
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, SvgIcon } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import grey from "@material-ui/core/colors/grey";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import LoginButton from './LoginButton'
 
@@ -21,10 +20,16 @@ const styles = {
     color: grey[50]
   },
   appbar: {
-    color: grey[50],
     backgroundColor: grey[900]
   }
 };
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#000000' },
+    secondary: { main: '#fafafa' },
+  },
+});
 
 function HomeIcon(props) {
   return (
@@ -71,7 +76,7 @@ class Header extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar className = {classes.appbar} position="static">
-          <Toolbar className = {classes.appbar}>
+          <Toolbar>
             <Typography color="inherit" style={{ flex: 1 }}>
               <h2 style={{letterSpacing:'5px'}}> TRIVIA NIGHT! </h2>
             </Typography>
@@ -104,8 +109,16 @@ class Header extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem component={Link} to="/dashboard">Profile</MenuItem>
-                  <MenuItem history={this.props.history} component={LoginButton}></MenuItem>
+                  <MuiThemeProvider theme={theme}>
+                    <MenuItem component={Link} to="/dashboard">
+                      <Button size= "large" variant="contained" color="primary">
+                        Profile
+                      </Button>
+                    </MenuItem>
+                    <MenuItem history={this.props.history}>
+                      <Button component={LoginButton}></Button>
+                    </MenuItem>
+                  </MuiThemeProvider>
                 </Menu>
               </div>
             )}
