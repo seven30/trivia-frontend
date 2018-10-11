@@ -3,6 +3,7 @@ import AuthService from '../services'
 import Login from '../pages/Login.js';
 import { Modal, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
 
 //function handles the Modal size
 function getModalStyle() {
@@ -54,7 +55,7 @@ class LoginButton extends Component {
       const { classes } = this.props;
       return (
         <div>
-          {this.auth.loggedIn() && <Button size= "large" variant="contained" color= "primary" onClick={this.logout}> Logout </Button>}
+          {this.auth.loggedIn() && <Button size= "large" variant="contained" color= "primary" onClick={this.logout} component={Link} to='/'> Logout </Button>}
           {!this.auth.loggedIn() && <Button size= "large" variant="contained" color="primary" onClick={this.handleOpen.bind(this)}> Login </Button>}
             <Modal
               open={this.state.open}
@@ -73,7 +74,6 @@ class LoginButton extends Component {
         this.setState({
             loggedIn: false
         })
-        this.props.history.push('/');
     }
 }
 
