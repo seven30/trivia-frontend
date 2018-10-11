@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Game from './pages/Game';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import LoginButton from './components/LoginButton';
 import GameModes from './pages/GameModes.js';
 import UserDashboard from './pages/UserDashboard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-import Header from './components/Header';
+
 
 const history = createBrowserHistory();
 

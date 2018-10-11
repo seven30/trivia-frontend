@@ -1,20 +1,8 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import AuthService from '../services'
-import { Link } from 'react-router-dom'
-
-//Text Inputs
 import Login from '../pages/Login.js';
-
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Modal, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Router } from 'react-router-dom';
-
 
 //function handles the Modal size
 function getModalStyle() {

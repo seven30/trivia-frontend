@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withStyles, Table } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
-
-////just for experimentation
 import TimerBar from '../components/TimerBar.js'
-////////////////////////////
-import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
+import { replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
+import { triviaFetch } from '../api/trivia-api.js'
 import Header from '../components/Header';
 
 
@@ -97,7 +92,6 @@ class Game extends Component {
 
   render() {
     let { score, questions, counter, questionsFetched, answered_questions, answers_order, questionIsAnswered } = this.state;
-    let question, incorrect_answers, correct_answer, answers;
     //If counter has reached the end of the questions render end page.
     if(counter !== 0 && counter === questions.length){
       //If user is logged in, save game history.
