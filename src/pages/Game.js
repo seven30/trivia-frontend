@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import GameCard from '../components/GameCard';
-import Timer from '../components/Timer.js';
+import Timer from '../components/timer.js';
 import GameResults from '../components/GameResults';
 import TimerBar from '../components/TimerBar.js'
 import { replaceUnicode } from '../helper_functions/helper-functions.js';
