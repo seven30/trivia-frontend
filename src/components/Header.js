@@ -1,8 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  AppBar, Toolbar, Typography, Button, IconButton, Switch, FormControlLabel, FormGroup, Menu, MenuItem, SvgIcon
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, SvgIcon } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import grey from "@material-ui/core/colors/grey";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
