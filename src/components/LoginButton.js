@@ -58,7 +58,6 @@ class LoginButton extends Component {
   }
 
   handleClose(){
-    this.props.history.push('/');
     this.setState({open: false, loggedIn: true})
   }
 
@@ -73,10 +72,10 @@ class LoginButton extends Component {
               open={this.state.open}
               onClose={this.handleClose.bind(this)}
             >
-              <div style={getModalStyle()}className={classes.paper}>
+              <div style={getModalStyle()} className={classes.paper}>
                 <Login history={this.props.history} closeModal={this.handleClose.bind(this)}/>
                 </div>
-            </Modal>}
+            </Modal>
           </div>
         )
     }

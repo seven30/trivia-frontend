@@ -12,6 +12,7 @@ import TimerBar from '../components/TimerBar.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
+import Header from '../components/Header';
 
 
 class Game extends Component {
@@ -104,12 +105,17 @@ class Game extends Component {
         this.saveGameHistory();
       }
       return (
-      <GameResults questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} score={score} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />)
+        <div>
+          <Header history={this.props.history}/>
+          <GameResults questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} score={score} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />)
+        </div>
+      )
     }
     console.log("STATE", this.state);
     //If game ongoing, render GameCard to display questions, and answers.
     return (
     <div>
+      <Header history={this.props.history}/>
       {questionsFetched && <TimerBar questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)} />}
 
       { questionsFetched && <Timer questions={questions} answers_order={answers_order} answered_questions={answered_questions} counter={counter} questionIsAnswered={questionIsAnswered} nextQuestion={this.nextQuestion.bind(this)} checkAnswer={this.checkAnswer.bind(this)}/>}

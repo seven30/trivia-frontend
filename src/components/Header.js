@@ -105,7 +105,7 @@ class Header extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem component={Link} to="/dashboard">Profile</MenuItem>
-                  <MenuItem component={LoginButton} ></MenuItem>
+                  <MenuItem history={this.props.history} component={LoginButton}></MenuItem>
                 </Menu>
               </div>
             )}

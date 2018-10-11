@@ -12,6 +12,7 @@ import GameModes from './pages/GameModes.js';
 import UserDashboard from './pages/UserDashboard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
+import Header from './components/Header';
 
 const history = createBrowserHistory();
 

@@ -104,7 +104,8 @@ class Login extends Component {
       this.auth.login(this.state)
       .then(json => {
 			  console.log("handling any errors", this.props);
-        //this.props.history.replace('/')
+        this.props.closeModal();
+        this.props.history.push('/');
 			  if(json.errors) {
 				  this.setState({
 					  errors: json.errors
@@ -112,7 +113,6 @@ class Login extends Component {
 			  }
 			  return json
 		})
-    this.props.closeModal();
   }
 }
 
