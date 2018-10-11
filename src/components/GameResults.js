@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import AuthService from '../services';
-import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
+import { replaceUnicode } from '../helper_functions/helper-functions.js';
 import '../pages/Game.css';
 import './GameCard.css';
 
 const styles = {
   top: {
+    background: 'black',
     border: 1,
-    color: 'black',
+    color: 'white',
     padding: '0 50px',
     width: "100vw"
+  },
+  black: {
+    background: 'black',
   },
   correct: {
     background: '#4CAF50',
@@ -126,7 +127,7 @@ class GameResults extends Component {
 
     if(this.Auth.loggedIn()){
       return (
-        <Card >
+        <Card classes={{root: classes.black}}>
           <Grid container direction="column" justify="flex-start" alignItems="left" >
             <Card classes={{root: classes.top}}>
               <h1 color="primary">{message}</h1>
@@ -142,7 +143,7 @@ class GameResults extends Component {
       )
     } else { //If guest, show end page with results, do not save history.
       return (
-        <Card >
+        <Card classes={{root: classes.black}}>
           <Grid container justify="flex-start" alignItems="left" classes={{root: classes.top}}>
             <Card classes={{root: classes.top}}>
               <h1 color="primary">{message}</h1>
