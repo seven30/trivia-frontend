@@ -16,10 +16,11 @@ class Game extends Component {
     super(props)
     this.Auth = new AuthService();
     this.gameMode = "Classic";
-    if(this.props.location.state){
-      this.category = Object.values(this.props.location.state.category)[0];
+    //Set the current category type, if multiple category is Mixed, otherwise, it's the category picked by user. 
+    if(this.props.location.state.categoryNums.length > 1){
+      this.category = "Mixed Categories";
     } else {
-      this.category = "Random";
+      this.category = this.props.location.state.categoryNums[0];
     }
     this.state = {
       questions: [],
@@ -32,18 +33,49 @@ class Game extends Component {
     }
   }
 
+  //Recursive function for making multiple fetches to the trivia api
+    //Takes in number of questions, array of categories, difficulty 'str', number of categories, an empty questions array
+  multiFetch(numOfQuestions, categories, difficulty, numOfCategories, questions){
+    let num = numOfQuestions % numOfCategories !== 0 ? Math.floor(numOfQuestions/numOfCategories) + 1 : Math.floor(numOfQuestions/numOfCategories);
+    let category = categories[numOfCategories-1];
+    //Base case to end the recursive function calls.
+    if(numOfCategories === 0){
+      //shuffle the order of the questions
+      shuffle(questions);
+      console.log(questions);
+      //set state of all fetched questions
+      this.setState({questionsFetched: true, questions: questions});
+      return questions;
+    } // run a trivia api fetch
+    triviaFetch(num, category, difficulty).then(res => {
+      //push all results as single entries into the questions array
+      for(let i = 0; i < res.length; i++){
+        questions.push(res[i]);
+      } // re-run the multifetch with new params
+      return this.multiFetch(numOfQuestions - num, categories, difficulty, numOfCategories - 1, questions);
+    });
+  }
+
   componentDidMount(){
+    //Fetch if no props have been passed
     if(!this.props.location.state){
       triviaFetch(10, "", "").then(res => {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       });
-    } else {
-      let { num, category, difficulty } = this.props.location.state;
-      let categoryNum = Object.keys(category);
-      let categoryName = Object.values(category);
-      console.log("num",num,"category",category,"difficulty",difficulty,"catNum", categoryNum, "catName", categoryName);
-      triviaFetch(num, categoryNum, difficulty).then(res => {
+    } //Fetch if multiple categories are selected
+    else if(this.props.location.state.categoryNums.length > 1){
+      let {categoryNums, categoryNames, num, difficulty } = this.props.location.state;
+      //shuffle the array of categories
+      shuffle(categoryNums);
+      //run the recursive fetch function
+      this.multiFetch(num, categoryNums, difficulty, categoryNums.length, []);
+    } //Fetch if a single category is selected
+    else {
+      console.log(this.props.location.state);
+      let { num, categoryNames, categoryNums, difficulty } = this.props.location.state;
+      console.log("num",num,"categoryNames",categoryNames,"categoryNums",categoryNums,"difficulty",difficulty);
+      triviaFetch(num, categoryNums[0], difficulty).then(res => {
         console.log(res);
         this.setState({questionsFetched: true, questions: res});
       });
