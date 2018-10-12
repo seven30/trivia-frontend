@@ -5,11 +5,11 @@ export default class AuthService {
 		this.domain = domain || process.env.REACT_APP_API_URL
 	}
 
-	login = (email, password) => {
-		console.log("Starting Login Request", email, password);
+	login = (user) => {
+		console.log("Starting Login Request", user);
 		return this.authFetch(`${this.domain}/users/sign_in`, {
 			method: "POST",
-			body: JSON.stringify(email, password),
+			body: JSON.stringify(user),
 		})
 		.then(res => res)
 	}
@@ -79,7 +79,7 @@ export default class AuthService {
 		})
 		.then(res => this._checkStatus(res))
 		.then(res => {
-			console.log(res.headers.get('Authorization'))
+			console.log("token", res.headers.get('Authorization'))
 			let token = res.headers.get('Authorization')
 			// set a token, taken out of response from API
 			this.setToken(token)
