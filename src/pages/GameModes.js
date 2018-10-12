@@ -68,7 +68,7 @@ const styles = theme => ({
     color: 'lightblue',
     borderColor: "deeppink",
     fontSize: '2em',
-    fontFamily: "bebas neue"
+    fontFamily: "freestyle script"
   }
 });
 
@@ -161,7 +161,7 @@ class GameModes extends Component {
       return (
         <MuiThemeProvider theme={theme}>
         <div className={classes.container}>
-          <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined" onClick={this.startGame.bind(this)}>Start Game</Button>
+          <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined" onClick={this.startGame.bind(this)}>Start Trivia</Button>
           <div className={classes.container}>
             {categories}
           </div>
