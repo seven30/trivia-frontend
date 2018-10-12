@@ -147,11 +147,12 @@ class NewRegister extends Component {
     console.log("::SUBMIT::")
     e.preventDefault()
     let { username, email, password } = this.state.user
+    //let user = {user: { email: email, password: password } };
 
     this.auth.register(this.state)
-    this.auth.login(email, password)
+    //.then(this.auth.login(user))
     .then(json => {
-      console.log("handling any errors");
+      console.log("handling any errors", json);
       this.props.history.push('/')
       if(json.errors) {
         this.setState({
