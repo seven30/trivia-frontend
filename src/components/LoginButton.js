@@ -55,8 +55,8 @@ class LoginButton extends Component {
       const { classes } = this.props;
       return (
         <div>
-          {this.auth.loggedIn() && <Button size= "large" variant="contained" color= "primary" onClick={this.logout} component={Link} to='/'> Logout </Button>}
-          {!this.auth.loggedIn() && <Button size= "large" variant="contained" color="primary" onClick={this.handleOpen.bind(this)}> Login </Button>}
+          {this.auth.loggedIn() && <Button className={this.props.className} size= "large" variant="contained" color= "primary" onClick={this.logout} component={Link} to='/'> Logout </Button>}
+          {!this.auth.loggedIn() && <Button className={this.props.className} size= "large" variant="contained" color="primary" onClick={this.handleOpen.bind(this)}> Login </Button>}
             <Modal
               open={this.state.open}
               onClose={this.handleClose.bind(this)}

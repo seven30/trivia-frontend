@@ -19,6 +19,7 @@ import '../fonts/fonts.css';
 const styles = {
   card: {
     minWidth: 275,
+    marginTop: '10vh'
   },
   bullet: {
     display: 'inline-block',
