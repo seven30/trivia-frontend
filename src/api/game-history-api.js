@@ -1,4 +1,4 @@
-const BASE = "http://localhost:3000";
+const BASE = process.env.REACT_APP_API_URL; //"http://localhost:3000";
 
 let createGameHistory = function(game_history){
   console.log("in create game history", game_history, game_history.user_id);
