@@ -11,7 +11,7 @@ import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
 import Game from './Game';
 import classNames from 'classnames';
-
+import '../fonts/fonts.css';
 //Object of all categories, and their corresponding number for the api requests
 const CATEGORIES = {
   "0": "Random",
@@ -60,7 +60,7 @@ const styles = theme => ({
     alignItems: 'center',
     justify: 'center',
     fontSize: '1.5em',
-    fontFamily: "bebas neue",
+    fontFamily: "BebasNeue",
     //color: '#81d4fa',
     //borderColor: '#2196f3'
   },
@@ -68,7 +68,7 @@ const styles = theme => ({
     color: 'lightblue',
     borderColor: "deeppink",
     fontSize: '2em',
-    fontFamily: "freestyle script"
+    fontFamily: "freescript"
   }
 });
 
