@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
-
+import '../fonts/fonts.css';
 
 
 const styles = {
@@ -27,7 +27,7 @@ const styles = {
   },
   title: {
     fontSize: 35,
-    fontFamily: "freestyle script"
+    fontFamily: "freescript"
   },
   pos: {
     marginBottom: 12,
@@ -47,8 +47,6 @@ class NewRegister extends Component {
   			}
   	}
   }
-  // <img src= {Logo} alt = "Trivia Night" height= "450vw" width="auto"/>
-
 
 
   render() {

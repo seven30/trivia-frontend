@@ -59,8 +59,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit,
     alignItems: 'center',
     justify: 'center',
-    fontSize: '1.5em',
-    fontFamily: "BebasNeue",
+    //fontSize: '1.5em',
+    //fontFamily: "BebasNeue",
     //color: '#81d4fa',
     //borderColor: '#2196f3'
   },
