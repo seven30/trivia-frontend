@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { classicModeFetch, triviaFetch } from '../api/trivia-api.js'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import GameCard from '../components/GameCard';
 import Timer from '../components/timer.js'
 import { shuffle, replaceUnicode } from '../helper_functions/helper-functions.js';
 import AuthService from '../services';
 import { createGameHistory } from '../api/game-history-api';
 import Game from './Game';
+import classNames from 'classnames';
 
 //Object of all categories, and their corresponding number for the api requests
 const CATEGORIES = {
@@ -42,25 +44,42 @@ const CATEGORIES = {
 
 const styles = theme => ({
   container: {
-    minHeight: '100vh',
-    minWidth: '100vw',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    display: 'inline-block',
-    alignItems: 'center',
-    justify: 'center'
+    display: 'flex',
+    flexWrap: 'wrap',
+    //backgroundColor: 'white',
   },
   button: {
     width: '30vw',
     minWidth: '140px',
     height: 'auto',
     minHeight: '70px',
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginRight: 'auto',
+    marginLeft: 'auto',
     marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit,
+    alignItems: 'center',
+    justify: 'center',
+    fontSize: '1.5em',
+    fontFamily: "bebas neue",
+    //color: '#81d4fa',
+    //borderColor: '#2196f3'
+  },
+  startButton: {
+    color: 'lightblue',
+    borderColor: "deeppink",
+    fontSize: '2em',
+    fontFamily: "bebas neue"
   }
-})
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      //light: '#81d4fa',
+      main: '#81d4fa'
+    },
+  },
+});
 
 class GameModes extends Component {
   constructor(props){
@@ -140,21 +159,25 @@ class GameModes extends Component {
       })
     if(this.state.categorySelected){
       return (
+        <MuiThemeProvider theme={theme}>
         <div className={classes.container}>
-          <Button className={classes.button} color="secondary" variant="contained" onClick={this.startGame.bind(this)}>Start Game</Button>
+          <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined" onClick={this.startGame.bind(this)}>Start Game</Button>
           <div className={classes.container}>
             {categories}
           </div>
         </div>
+        </MuiThemeProvider>
       )
     } else {
       return (
+        <MuiThemeProvider theme={theme}>
         <div className={classes.container}>
-          <Button className={classes.button} color="secondary" variant="outlined">Select Category</Button>
-          <div>
-            {categories}
-          </div>
+          <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined">Select Categories</Button>
+            <div className={classes.container}>
+              {categories}
+            </div>
         </div>
+        </MuiThemeProvider>
       )
     }
   }

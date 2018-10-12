@@ -20,7 +20,7 @@ class Game extends Component {
     if(this.props.location.state.categoryNums.length > 1){
       this.category = "Mixed Categories";
     } else {
-      this.category = this.props.location.state.categoryNums[0];
+      this.category = this.props.location.state.categoryNames[0];
     }
     this.state = {
       questions: [],
