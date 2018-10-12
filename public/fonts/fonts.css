@@ -1,4 +1,3 @@
+@font-face { font-family: FreestyleScript; src: url('./FREESCPT.TTF'); }
 
-@font-face{ font-family: freescript; src: url('FREESCPT.TTF'); }
-
-@font-face { font-family: BebasNeue; src: url('BebasNeue-Regular.ttf'); }
+@font-face { font-family: BebasNeue; src: url('./BebasNeue-Regular.ttf'); }
