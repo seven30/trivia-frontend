@@ -78,6 +78,7 @@ class UserDashboard extends Component {
   }
 
   render() {
+    console.log("ENV API", process.env.API_URL);
     let { username, gameHistories } = this.state;
     let average = this.calculateAverage()
 
