@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from '../services';
 import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Button } from "@material-ui/core";
 
 //Styling for Login
 const styles = theme => ({
@@ -67,10 +67,9 @@ class Login extends Component {
                     value={password}
                     onChange={this.handleChange}
                   />
-                <input
-                  type="submit"
-                  value="Login"
-                />
+                <Button type="submit" color="secondary" variant="contained">
+                  Login
+                </Button>
               </form>
             </div>
         )
