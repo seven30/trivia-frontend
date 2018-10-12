@@ -41,6 +41,8 @@ const CATEGORIES = {
   "32": "Cartoon & Animations",
 }
 
+const numOfQuestionsArr =  [5, 10, 15, 20, 25];
+
 
 const styles = theme => ({
   container: {
@@ -59,7 +61,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit,
     alignItems: 'center',
     justify: 'center',
-    fontSize: '1.25em',
+    fontSize: '1em',
     //fontFamily: "BebasNeue",
     //letterSpacing: '1px'
     //color: '#81d4fa',
@@ -70,6 +72,24 @@ const styles = theme => ({
     borderColor: "deeppink",
     fontSize: '2em',
     fontFamily: "freescript"
+  },
+  numButton: {
+      width: '10vw',
+      //minWidth: '140px',
+      height: 'auto',
+      minHeight: '70px',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      marginTop: theme.spacing.unit,
+      marginBottom: theme.spacing.unit,
+      alignItems: 'center',
+      justify: 'center',
+      fontSize: '1em',
+  },
+  text: {
+    color: 'deeppink',
+    display: 'block',
+    textAlign: 'center'
   }
 });
 
@@ -90,17 +110,19 @@ class GameModes extends Component {
       categoryNames: [],
       categoryNums: [],
       categorySelected: false,
+      numberSelected: false,
+      numOfQuestions: 10
     }
   }
 
   //redirects to the game page, sending along the game info
   startGame(){
-    let { categoryNames, categoryNums } = this.state;
+    let { categoryNames, categoryNums, numOfQuestions } = this.state;
     //console.log(category);
     this.props.history.push({
       pathname: '/game',
       state: {
-        num: 10,
+        num: numOfQuestions,
         categoryNames: categoryNames,
         categoryNums: categoryNums,
         difficulty: ""
@@ -128,10 +150,26 @@ class GameModes extends Component {
     this.setState({categoryNames: categoryNames, categoryNums: categoryNums, categorySelected: categorySelected})
   }
 
+  setNumber(num){
+    //let { numberSelected, numOfQuestions } = this.state;
+    this.setState({numberSelected: true, numOfQuestions: num});
+  }
+
   render(){
     console.log("STATE", this.state);
     const { classes } = this.props;
-    let { categoryNames, categoryNums, categorySelected } = this.state;
+    let { categoryNames, categoryNums, categorySelected, numberSelected, numOfQuestions } = this.state;
+    let numbers = numOfQuestionsArr.map((num, i) => {
+      if(num === numOfQuestions){
+        return (
+          <Button variant="contained" color="primary" className={classNames(classes.numButton)} onClick={this.setNumber.bind(this, num)}>{num}</Button>
+        );
+      } else {
+        return (
+          <Button variant="outlined" color="secondary" className={classNames(classes.numButton)} onClick={this.setNumber.bind(this, num)}>{num}</Button>
+        );
+      }
+    });
     //create an array from the CATEGORIES object
       //map through the array and return the buttons
     let categories =  Object.entries(CATEGORIES).map((category, i) => {
@@ -163,10 +201,13 @@ class GameModes extends Component {
         <MuiThemeProvider theme={theme}>
         <div className={classes.container}>
           <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined" onClick={this.startGame.bind(this)}>Start Trivia</Button>
+          </div>
+          <div className={classes.container}>
+            {numbers}
+          </div>
           <div className={classes.container}>
             {categories}
           </div>
-        </div>
         </MuiThemeProvider>
       )
     } else {
@@ -174,10 +215,14 @@ class GameModes extends Component {
         <MuiThemeProvider theme={theme}>
         <div className={classes.container}>
           <Button className={classNames(classes.button, classes.startButton)} color="secondary" variant="outlined">Select Categories</Button>
+          </div>
+          <div className={classes.container}>
+            {numbers}
+          </div>
             <div className={classes.container}>
               {categories}
             </div>
-        </div>
+
         </MuiThemeProvider>
       )
     }
