@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   startButton: {
     marginBottom: theme.spacing.unit,
-    width: '25vw',
+    minWidth: '25vw',
     color: 'lightblue',
     borderColor: "#f2aeae",
     fontSize: '2em',
