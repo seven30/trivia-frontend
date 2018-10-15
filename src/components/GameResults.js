@@ -45,7 +45,7 @@ class GameResults extends Component {
     let { questions, counter, answered_questions, answers_order, score} = this.props;
     //Created a bunch of snarky comments to be displayed to player after the game ends, based on their score.
     let messages = ["Yo, are you cereal? You couldn't even get one right?", "Hey, it's OK. I forgot everything I learned in college too.", "A calculator could do better than you.", "Better practice Jeopardy with Alexa tonight...", "Better than Dwight's free throw percentage I guess...", "Don't quit your day job, pal.", "Great job, Average Joe!", "Wow. Just... like... Wow.", "Dang, the glass is like 10% empty...", "Congratulations! You know how to use Google."]
-    let final_score = score/questions.length*100
+    let final_score = Math.floor(score/questions.length*100)
     let message = ''
     switch (true) {
       case final_score === 0:
