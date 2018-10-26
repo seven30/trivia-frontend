@@ -21,18 +21,24 @@ const styles = {
     background: 'black',
   },
   correct: {
-    background: '#4CAF50',
+    background: 'rgba(76, 175, 80, 0.95)',
     border: 1,
     color: 'white',
     padding: '0 30px',
   },
   incorrect: {
-    background: '#EF5350',
+    background: 'rgba(239, 83, 80, 0.95)',
     border: 0,
     color: 'white',
     padding: '0 30px',
   },
 };
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: { main: '#fafafa' },
+  },
+});
 
 class GameResults extends Component {
   constructor(props){
@@ -98,7 +104,8 @@ class GameResults extends Component {
       val.players = replaceUnicode(val.players);
       if (val.correct === val.players) {
         return (
-          <MuiThemeProvider>
+
+          <div>
             <Card classes={{root: classes.correct}}>
               <CardContent>
                   <h3>Question: {val.question}</h3>
@@ -107,11 +114,14 @@ class GameResults extends Component {
                   Your Answer: {val.players}</p>
               </CardContent>
             </Card>
-          </MuiThemeProvider>
+            <div style={{paddingBottom:'2px'}}>
+            </div>
+          </div>
+
         )
       } else {
         return (
-          <MuiThemeProvider>
+          <div>
             <Card classes={{root: classes.incorrect}}>
               <CardContent>
                   <h3>Question: {val.question}</h3>
@@ -120,7 +130,9 @@ class GameResults extends Component {
                   Your Answer: {val.players}</p>
               </CardContent>
             </Card>
-          </MuiThemeProvider>
+            <div style={{paddingBottom:'2px'}}>
+            </div>
+          </div>
         )
       }
     })
@@ -148,8 +160,10 @@ class GameResults extends Component {
             <Card classes={{root: classes.top}}>
               <h1 color="primary">{message}</h1>
               <h2 color="primary">Score: {final_score}%</h2>
-              <Button variant="contained" color="primary" href='/selectgame'>Play Again</Button>
-              <Button variant="contained" color="primary" href='/register'>Register here to save your scores!</Button>
+              <MuiThemeProvider theme={theme}>
+                <Button color="secondary" href='/selectgame'>Play Again</Button>
+                <Button color="secondary" href='/register'>Register here to save your scores!</Button>
+              </MuiThemeProvider>
             </Card>
           </Grid>
           <Grid container direction="column" justify="flex-start" alignItems="left">
