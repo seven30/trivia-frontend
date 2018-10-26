@@ -44,7 +44,7 @@ class GameResults extends Component {
     const { classes } = this.props
     let { questions, counter, answered_questions, answers_order, score} = this.props;
     //Created a bunch of snarky comments to be displayed to player after the game ends, based on their score.
-    let messages = ["Yo, are you cereal? You couldn't even get one right?", "Hey, it's OK. I forgot everything I learned in college too.", "A calculator could do better than you.", "Better practice Jeopardy with Alexa tonight...", "Better than Dwight's free throw percentage I guess...", "Don't quit your day job, pal.", "Great job, Average Joe!", "Wow. Just... like... Wow.", "Dang, the glass is like 10% empty...", "Congratulations! You know how to use Google."]
+    let messages = ["Are you serious? You couldn't even get one right?", "Hey, it's OK. I forgot everything I learned in college too.", "A calculator could do better than you.", "Better practice Jeopardy with Alexa tonight...", "Better than Dwight Howard's free throw percentage I guess...", "Don't quit your day job, pal.", "Great job, Average Joe!", "Need some aloe for that burn?", "Dang, the glass is like 10% empty...", "Congratulations! You know how to use Google."]
     let final_score = Math.floor(score/questions.length*100)
     let message = ''
     switch (true) {
@@ -148,8 +148,8 @@ class GameResults extends Component {
             <Card classes={{root: classes.top}}>
               <h1 color="primary">{message}</h1>
               <h2 color="primary">Score: {final_score}%</h2>
-              <Button color="primary" href='/selectgame'>Play Again</Button>
-              <Button color="primary" href='/register'>Register here to save your scores!</Button>
+              <Button variant="contained" color="primary" href='/selectgame'>Play Again</Button>
+              <Button variant="contained" color="primary" href='/register'>Register here to save your scores!</Button>
             </Card>
           </Grid>
           <Grid container direction="column" justify="flex-start" alignItems="left">
